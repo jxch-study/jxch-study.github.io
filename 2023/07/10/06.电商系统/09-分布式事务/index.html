@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		08.支付超时 | 
+		09.分布式事务 | 
 	 
 	架构师
 	</title>
@@ -236,7 +236,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/08-%E6%94%AF%E4%BB%98%E8%B6%85%E6%97%B6/">
                      
 										    08.支付超时
@@ -247,7 +247,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
                      
 										    09.分布式事务
@@ -268,7 +268,7 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<h1 id="article-title">
-	08.支付超时
+	09.分布式事务
 </h1>
 
 <!-- meta -->
@@ -276,7 +276,7 @@
 	
 
 	<span>姜希成</span>
-	<span>2023-07-10 05:19:18</span>
+	<span>2023-07-10 07:15:43</span>
 
   <div id="article-categories">
     
@@ -299,7 +299,7 @@
             
                 <span>
                     <i class="fa fa-tag" aria-hidden="true">
-                    <a href="/tags/支付超时/">支付超时</a>
+                    <a href="/tags/分布式事务/">分布式事务</a>
                     </i>
                 </span>
             
@@ -311,42 +311,56 @@
 
 <!-- content -->
 <div id="article-content">
-	<h1 id="延迟任务（不推荐）"><a href="#延迟任务（不推荐）" class="headerlink" title="延迟任务（不推荐）"></a>延迟任务（不推荐）</h1><ol>
-<li>下单时增加一个定时任务，在五分钟后对订单进行超时判断。</li>
-<li>超时判断时，可以先去支付宝上查询订单支付状态。</li>
-</ol>
-<p>如果已支付，则判断订单是否正常结束，这是因为在用户完成扫码支付后，支付宝正常会往图灵电商发送支付成功的通知。但是这个通知是没有事务保证的，所以是非常有可能失败的，这时就需要在订单超时判断时对状态进行对齐。<br>如果未支付，则需要释放库存，取消本地订单，然后通知支付宝取消支付订单。</p>
-<p><strong>五分钟时间太长了，而支付宝的通知又没有事务保证</strong>，通常企业中的做法并不会等到订单超时时才去查询订单状态，而是<strong>在后台会多次频繁查询支付宝支付状态</strong>，这样可以更及时的获得支付结果。例如五分钟超时时间，至少需要半分钟或者一分钟去查一次支付宝订单状态，如果支付成功了，就及时结束后续等待处理过程。如果没有完成支付，就再开启下一个定时任务，等待下次检查。</p>
-<h1 id="RocketMQ事务消息（推荐）"><a href="#RocketMQ事务消息（推荐）" class="headerlink" title="RocketMQ事务消息（推荐）"></a>RocketMQ事务消息（推荐）</h1><p>RocketMQ事务消息机制的核心是对消息状态进行不断的确认。循环确认的过程就正好可以用来改造，解决上面说的频繁任务调度的问题。这样就可以专注于开发业务逻辑，而不用关注频繁复杂的任务调度逻辑。</p>
+	<h1 id="Seata架构"><a href="#Seata架构" class="headerlink" title="Seata架构"></a>Seata架构</h1><ul>
+<li>TC (Transaction Coordinator) - 事务协调者：维护全局和分支事务的状态，驱动全局事务提交或回滚。</li>
+<li>TM (Transaction Manager) - 事务管理器：定义全局事务的范围：开始全局事务、提交或回滚全局事务。</li>
+<li>RM (Resource Manager) - 资源管理器：管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。</li>
+</ul>
+<p>其中，TC 为单独部署的 Server 服务端，TM 和 RM 为嵌入到应用中的 Client 客户端。</p>
+<p>一个分布式事务的生命周期：<br>1. TM 请求 TC 开启一个全局事务。TC 会生成一个 XID 作为该全局事务的编号。XID会在微服务的调用链路中传播，保证将多个微服务的子事务关联在一起。<br>2. RM 请求 TC 将本地事务注册为全局事务的分支事务，通过全局事务的 XID 进行关联。<br>3. TM 请求 TC 告诉 XID 对应的全局事务是进行提交还是回滚。<br>4. TC 驱动 RM 们将 XID 对应的自己的本地事务进行提交还是回滚。</p>
+<h2 id="分库分表全局事务（ShardingSphere）"><a href="#分库分表全局事务（ShardingSphere）" class="headerlink" title="分库分表全局事务（ShardingSphere）"></a>分库分表全局事务（ShardingSphere）</h2><p>不能简单的在全局事务发起方使用 <code>@GlobalTransactional</code>，因为seata找不到逻辑表对应的物理表，需要融入 Apache ShardingSphere 分布式事务</p>
+<p>整合 Seata AT 事务时，需要将 TM，RM 和 TC 的模型融入 Apache ShardingSphere 的分布式事务生态中。 在数据库资源上，Seata 通过对接 DataSource 接口，让 JDBC 操作可以同 TC 进行远程通信。 同样，Apache ShardingSphere 也是面向 DataSource 接口，对用户配置的数据源进行聚合。 因此，将 DataSource 封装为 基于Seata 的 DataSource 后，就可以将 Seata AT 事务融入到 Apache ShardingSphere的分片生态中。</p>
 <ol>
-<li>支付宝预下单时发送事务消息：通知下游服务进行订单取消</li>
-<li>发送消息后，会先执行本地事务。 <ul>
-<li>将订单ID放到Redis中，这样可以在后续进行支付状态检查时，快速找到对应的业务信息。</li>
-<li>只要下单成功，就会返回<code>UNKOWN</code>状态，这样RocketMQ会在之后进行状态回查（检查支付宝支付状态）。</li>
-</ul>
-</li>
-<li>然后在事务状态回查时<ul>
-<li>会自行记录回查次数，超过最大次数就直接取消订单（<code>transactionCheckInterval</code>，默认回查15次，间隔60s，超过<code>ROLLBACK</code>）<ul>
-<li>如果没有超过最大次数，就可以去支付宝中查询订单支付状态。<ul>
-<li>如果已经支付完成，则返回<code>ROLLBACK</code>状态，消息取消，后续就不会再进行本地订单取消了。</li>
-<li>如果未支付，则记录回查次数后，返回<code>UNKNOWN</code>状态，等待下次回查。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>如果订单已经超时（事务消息成功发送出去了）<ul>
-<li>下游的消费者就会完成取消本地订单，释放库存等操作。</li>
-</ul>
-</li>
-<li>如果本地订单已经取消，而支付宝支付状态已经成功，则退款</li>
+<li>引入依赖</li>
+<li>配置seata.conf <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">client &#123;</span><br><span class="line">    application.id = tulingmall‐order‐curr</span><br><span class="line">    transaction.service.group = tuling‐order‐group</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>开启全局事务配置:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GlobalTransactional和ShardingTransactionType不能同时出现</span></span><br><span class="line"> <span class="meta">@ShardingTransactionType(TransactionType.BASE)</span></span><br><span class="line"> <span class="meta">@Transactional</span></span><br></pre></td></tr></table></figure></li>
+<li>关闭Seata数据源自动代理<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line">    <span class="string">enable‐auto‐data‐source‐proxy:</span> <span class="literal">false</span> </span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="通过聚合支付进行分布式事务控制"><a href="#通过聚合支付进行分布式事务控制" class="headerlink" title="通过聚合支付进行分布式事务控制"></a>通过聚合支付进行分布式事务控制</h2><p>如果在对接过程中，直接使用支付宝的二维码通知用户进行当面支付。而用户使用支付宝扫码支付的过程，电商都是完全不知道的，也就没有办法对用户的支付动作进行控制。比如如果电商本地的订单已经超时，就要阻止用户进行扫码支付。可以在支付宝的回调接口判断订单状态，如果订单式已关闭，则发起订单回退。这样显然效率是不高的。</p>
-<p>在很多电商项目中，会采用聚合支付的方式，统一对接多个第三方支付方。用户的支付动作就不是直接与支付宝这样的第三方支付公司交互完成，而是要经过电商后台转发请求完成。这时，就可以通过添加一些分布式锁机制，保证整个支付业务是串行执行的，以<strong>防止在电商进行订单超时回退后，用户再次扫码支付</strong>。</p>
-<h2 id="正向通知与反向通知"><a href="#正向通知与反向通知" class="headerlink" title="正向通知与反向通知"></a>正向通知与反向通知</h2><p>当前是通过事务消息通知下游服务订单取消，这其实就是一种反向通知的方式。但是其实最直观的方式还是使用正向通知，即通过事务消息通知下游服务进行订单支付确认，这样这个下单的消息就容易扩展更多的下游消费者。订单下单确认是用户完成支付后，支付宝发起的通知来确认的。这时，如果<strong>订单确认的下游服务实现了幂等控制</strong>，就完全可以将事务消息机制改为正向通知。即在事务消息回查过程中，确认用户已经完成了支付，就发送消息通知下游服务订单支付成功。这样也可以防止支付宝通知丢失造成的订单状态缺失。</p>
-<p>而用户订单超时判断，则可以在事务消息的状态回查过程中，通过记录回查次数判断。如果已经超时，则返回Rollback。同时启动另外一个消息生产者，往下游服务发送一个订单取消的消息，这样也是可以的。</p>
-<h2 id="兜底补偿机制"><a href="#兜底补偿机制" class="headerlink" title="兜底补偿机制"></a>兜底补偿机制</h2><p>对于订单超时后的回退处理，不光通过RocketMQ的事务消息进行了通知，另外也部署<strong>定时任务</strong>，批量回退超时的订单。<br>这其实就是一种事务消息的兜底补偿机制，以处理那些事务消息机制有可能漏处理的超时订单。在设计金融相关业务时，这种兜底策略会显得尤为重要。</p>
+<h1 id="柔性事务：可靠消息最终一致性"><a href="#柔性事务：可靠消息最终一致性" class="headerlink" title="柔性事务：可靠消息最终一致性"></a>柔性事务：可靠消息最终一致性</h1><h2 id="本地消息表方案"><a href="#本地消息表方案" class="headerlink" title="本地消息表方案"></a>本地消息表方案</h2><ol>
+<li>定时任务扫描日志<ul>
+<li>启动独立的线程，定时对消息日志表中的消息进行扫描并发送至消息中间件，在消息中间件反馈发送成功后删除该消息日志，否则等待定时任务下一周期重试。</li>
+</ul>
+</li>
+<li>消费消息（幂等控制）<ul>
+<li>可以使用MQ的ack（即消息确认）机制，消费者监听MQ，如果消费者接收到消息并且业务处理完成后向MQ发送ack（即消息确认），此时说明消费者正常消费消息完成，MQ将不再向消费者推送消息，否则消费者会不断重试向消费者来发送消息。</li>
+<li>由于消息会重复投递，需要实现幂等性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Rocketmq事务消息"><a href="#Rocketmq事务消息" class="headerlink" title="Rocketmq事务消息"></a>Rocketmq事务消息</h2><p>RocketMQ事务消息设计则主要是为了<strong>解决Producer端的消息发送与本地事务执行的原子性问题</strong>，RocketMQ的设计中broker与producer端的双向通信能力，使得broker天生可以作为一个事务协调者存在；而RocketMQ本身提供的存储机制为事务消息提供了持久化能力；RocketMQ的高可用机制以及可靠消息设计则为事务消息在系统发生异常时依然能够保证达成事务的最终一致性。在RocketMQ 4.3后实现了完整的事务消息，实际上其实是对本地消息表的一个封装，将本地消息表移动到了MQ内部，解决Producer端的消息发送与本地事务执行的原子性问题。</p>
+<ol>
+<li>Producer发送事务消息<ul>
+<li>Producer（MQ发送方）发送事务消息至MQ Server，MQ Server将消息状态标记为Prepared（预览状态），注意此时这条消息消费者（MQ订阅方）是无法消费到的。</li>
+</ul>
+</li>
+<li>MQ Server回应消息发送成功<ul>
+<li>MQ Server接收到Producer发送的消息则回应发送成功表示MQ已接收到消息。</li>
+</ul>
+</li>
+<li>Producer执行本地事务</li>
+<li>消息投递<ul>
+<li>若Producer本地事务执行成功则自动向MQ Server发送commit消息</li>
+<li>MQ Server接收到commit消息后将“该消息”状态标记为可消费，此时MQ订阅方即正常消费消息；</li>
+<li>若Producer 本地事务执行失败则自动向MQ Server发送rollback消息，MQ Server接收到rollback消息后将删除“该消息”。</li>
+<li>MQ订阅方消费消息，消费成功则向MQ回应ack，否则将重复接收消息。这里ack默认自动回应，即程序执行正常则自动回应ack。</li>
+</ul>
+</li>
+<li>事务回查<ul>
+<li>如果执行Producer端本地事务过程中，执行端挂掉，或者超时，MQ Server将会不停的询问同组的其他Producer来获取事务执行状态，这个过程叫事务回查。MQ Server会根据事务回查结果来决定是否投递消息。</li>
+</ul>
+</li>
+</ol>
+<p>对用户则来说，用户需要分别实现本地事务执行以及本地事务回查方法（<code>RocketMQLocalTransactionListener</code>），因此只需关注本地事务的执行状态即可。</p>
 
 </div>
 
@@ -355,16 +369,11 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  09.分布式事务
-              </a>
-            
         </div>
         <div class="item right">
             
-              <a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/07-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
-                07.订单系统设计
+              <a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/08-%E6%94%AF%E4%BB%98%E8%B6%85%E6%97%B6/">
+                08.支付超时
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             
