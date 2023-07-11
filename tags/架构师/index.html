@@ -389,194 +389,18 @@
 		<div id="index">
 	
 		<div class="index-li">
-			<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/07-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+			<a href="/2023/07/12/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/17-%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8F%90%E5%8D%87/">
 				<h2 class="index-title">
-					07.订单系统设计
+					17.架构师提升
 				</h2>
 				<div class="index-brief">
-					重复下单问题（幂等）
-用户在点击“提交订单”的按钮时，不小心点了两下
-网络错误也有可能会导致重传，很多RPC框架和网关都拥有自动重试机制
-
-主键唯一约束为订单系统增加一个“生成订单号”的服务,这个服务没有参数,返回值就是一个新的、全局唯一的订单号。在用户进入创建订单的页面时，前端页面会先调用这个生成
+					作为一个架构师仅仅掌握这些“硬”知识、“硬”技能还不够，“业务驱动技术”，但是业务领域更多是很多“软”性的、抽象的技能。一旦一个东西呈“软”性的，大家虽然知道这类东西存在，但又难于表述。
+业务架构业务意识互联网时代有个岗位——产品经理。而在互联网大规模发展起来之前，软件行业通常称为“需求分析师”。技
 					...
 				</div>
 			</a>
                 <div class="article-meta">
-				    <span>2023-07-09</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/06-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3%E6%95%B4%E5%90%88OAuth2-0%E6%8E%88%E6%9D%83%E4%B8%AD%E5%BF%83/">
-				<h2 class="index-title">
-					06.微服务网关整合OAuth2.0授权中心
-				</h2>
-				<div class="index-brief">
-					
-配置授权服务器（AuthorizationServerConfigurerAdapte - 授权码&#x2F;密码）
-DB模式
-内存模式
-
-
-SpringSecurity（WebSecurityConfigurerAdapter）
-JWT：头部（header）、载荷（payload）与签名（sig
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-09</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/05-%E5%88%86%E5%B8%83%E5%BC%8F%E5%94%AF%E4%B8%80ID/">
-				<h2 class="index-title">
-					05.分布式唯一ID
-				</h2>
-				<div class="index-brief">
-					
-全局唯一性：不能出现重复的ID号，既然是唯一标识，这是最基本的要求。
-趋势递增、单调递增：保证下一个ID一定大于上一个ID。
-信息安全：如果ID是连续的，恶意用户的扒取工作就非常容易做了，直接按照顺序下载指定URL 即可；如果是订单号就更危险了，竞对可以直接知道我们一天的单量。所以在一些应用场景下
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-09</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/04-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A8%E9%93%BE%E8%B7%AF%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/">
-				<h2 class="index-title">
-					04.微服务全链路灰度发布
-				</h2>
-				<div class="index-brief">
-					灰度发布 Gray Release（又名金丝雀发布 Canary Release）。不停机旧版本，部署新版本，高比例流量（例如：95%）走旧版本，低比例流量（例如：5%）切换到新版本，通过监控观察无问题，逐步扩大范围，最终把所有流量都迁移到新版本上。属无损发布。
-优点：灵活简单，不需要用户标记驱动。
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/03-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%8B%86%E5%88%86/">
-				<h2 class="index-title">
-					03.微服务架构拆分
-				</h2>
-				<div class="index-brief">
-					微服务拆分时机微服务不仅仅是技术的升级，更是开发方式、组织架构、开发观念的转变。
-
-业务规模：业务模式得到市场的验证，需要进一步加快脚步快速占领市场，这时业务的规模变得越来越大，按产品生命周期来划分（导入期、成长期、成熟期、衰退期）这时一般在成长期阶段。如果是导入期，尽量采用单体架构。
-团队规模：一
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/02-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%9E%B6%E6%9E%84/">
-				<h2 class="index-title">
-					02.多数据源架构
-				</h2>
-				<div class="index-brief">
-					01. AbstractRoutingDataSource（Spring）1234567891011121314151617181920212223242526@Component@Primary public class DynamicDataSource extends AbstractRout
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/01-%E5%8D%95%E4%BD%93VS%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
-				<h2 class="index-title">
-					01.单体VS微服务
-				</h2>
-				<div class="index-brief">
-					单体服务的优点
-应用的开发很简单，IDE 和其他开发工具只需要构建这一个单独的应用程序
-易于对应用程序进行大规模的更改:可以更改代码和数据库模式，然后构建和部署测试相对简单。
-开发测试简单:开发者只需要写几个端到端的测试,启动应用程序，调用 RESTAPI，然后使用 Selenium 这样的工具测试
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
+				    <span>2023-07-12</span>
                     
                             
                                 
@@ -593,8 +417,6 @@ JWT：头部（header）、载荷（payload）与签名（sig
 	
 	
 	<div id="index-paginator">
-		
-			<a class="extend prev" rel="prev" href="/categories/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/">&lt;</a><a class="page-number" href="/categories/%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/">1</a><span class="page-number current">2</span>
 		
 	</div>
 </div>
