@@ -527,6 +527,54 @@
 <p>缺点：由于增加了一层代理转发，因此每次数据访问的链路变得更长了，这必然会导致一定的性能损失。而且代理服务本身也是集群的单点。当然，我们可以把代理服务也做成一个集群来解决单点问题，那样集群就更复杂了。</p>
 <h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><p><font color="green"><strong>把代理服务的寻址功能前移到客户端中。</strong></font>客户端在发起请求之前,首先会查询元数据，客户端可以自行缓存元数据，这样访问性能基本上就与单机版的Redis 一样了。如果某个分片的主节点宕机了，就会选举新的主节点，并更新元数据中的信息。对集样的扩容操作也比较简单，除了必须完成数据的迁移工作之外，再更新一下元数据就可以了。</p>
 <p>当然元数据服务仍然是一个单点，但是它的数据量不大，访问量也不大，相对来说比较容易实现。利用已有的ZooKeeper、etcd 甚至MySQL 都可以被用来实现上述元数据服务。定制客户端的Redis 集群方案应该是最适合超大规模Redis 集群的方案，在性能、弹性、高可用等几个方面的表现都非常好，缺点是整个架构比较复杂，客户端不能通用，需要开发定制化的Redis 客户端，所以往往只有规模足够大的企业才能负担得起高昂的定制开发成本。</p>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><p> <strong>缓存一定是离用户越近越好</strong></p>
+<h2 id="Redis数据一致性"><a href="#Redis数据一致性" class="headerlink" title="Redis数据一致性"></a>Redis数据一致性</h2><ul>
+<li><p>先更新缓存，再更新数据库（更新DB异常）</p>
+</li>
+<li><p>先更新数据库，再更新缓存（更新缓存失败）</p>
+</li>
+<li><p>先删除缓存，后更新数据库（更新DB之前被其他进程更新了缓存）</p>
+<ul>
+<li><p>主从复制问题：更新缓存的查询指定为主库</p>
+</li>
+<li><p>异步延时双删</p>
+</li>
+</ul>
+</li>
+<li><p><strong>先更新数据库，后删除缓存（写入缓存之前被其他进程更新了DB）</strong></p>
+<ul>
+<li><p>低概率：要求写库操作快于读库</p>
+</li>
+<li><p>异步延时双删</p>
+</li>
+</ul>
+</li>
+<li><p><strong>使用Canal监听binlog日志，更新缓存</strong></p>
+</li>
+</ul>
+<p><strong>本地缓存</strong></p>
+<ul>
+<li><p><strong>设置双缓存</strong></p>
+</li>
+<li><p>正式缓存是最后一次写入后经过固定时间过期</p>
+</li>
+<li><p>备份缓存是设置最后一次访问后经过固定时间过期</p>
+</li>
+<li><p>异步刷新：正式缓存只有无效才会被重新写入，备份缓存无论是否无效都会重新写入</p>
+</li>
+<li><p>缓存预热</p>
+</li>
+</ul>
+<h2 id="大厂不用Redis-Cluster构建集群-1"><a href="#大厂不用Redis-Cluster构建集群-1" class="headerlink" title="大厂不用Redis Cluster构建集群"></a>大厂不用Redis Cluster构建集群</h2><ul>
+<li><p>代理</p>
+</li>
+<li><p><strong>把代理服务的寻址功能前移到客户端中</strong></p>
+<ul>
+<li>ZooKeeper保存元数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><p>Cache Aside、Read&#x2F;Write Through、Read Through、Write Through、Write Behind Caching</p>
 
 </div>
 

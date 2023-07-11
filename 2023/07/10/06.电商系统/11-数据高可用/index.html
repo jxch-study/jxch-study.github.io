@@ -508,6 +508,88 @@
 </ul>
 </li>
 </ol>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="Canal：把自己伪装成一个MySOL的从节点"><a href="#Canal：把自己伪装成一个MySOL的从节点" class="headerlink" title="Canal：把自己伪装成一个MySOL的从节点"></a>Canal：<strong>把自己伪装成一个MySOL的从节点</strong></h2><ol>
+<li><p><strong>先开启 Binlog 写入功能，配置binlog-format为ROW模式</strong></p>
+</li>
+<li><p><strong>给Canal 设置一个用来复制数据的MySQL账号</strong></p>
+</li>
+<li><p><strong>修改canal.properties 文件，比较关键的是canal.destinations</strong></p>
+</li>
+<li><p><strong>修改instance.properties</strong></p>
+<ol>
+<li><p><strong>MySQL 主服务的连接配置</strong></p>
+</li>
+<li><p><strong>要对哪些相关的业务表进行监视</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="跨系统实时数据同步：息队列来解耦上下游"><a href="#跨系统实时数据同步：息队列来解耦上下游" class="headerlink" title="跨系统实时数据同步：息队列来解耦上下游"></a>跨系统实时数据同步：<strong>息队列来解耦上下游</strong></h2><h2 id="不停机更换数据库（保证每一步都是可逆的）"><a href="#不停机更换数据库（保证每一步都是可逆的）" class="headerlink" title="不停机更换数据库（保证每一步都是可逆的）"></a>不停机更换数据库（<strong>保证每一步都是可逆的</strong>）</h2><ol>
+<li><p><strong>把旧库的数据全部复制到新库中，保证新旧两个库的数据是实时同步的</strong></p>
+<ul>
+<li><strong>这一步不需要回滚，停掉同步程序就可以了</strong></li>
+</ul>
+</li>
+<li><p>改造DAO：<strong>支持双写和读取新旧两个库，并预留热切换开关</strong></p>
+</li>
+<li><p><strong>只读写旧库，验证新旧两个库中的数据是否保持一致</strong></p>
+</li>
+<li><p><strong>开启双写开关，停掉同步程序</strong></p>
+<ul>
+<li><p><strong>先写旧库，再写新库，并且以旧库的结果为准</strong></p>
+</li>
+<li><p><strong>如果旧库写成功，新库写失败，则返回成功</strong></p>
+</li>
+<li><p><strong>如果旧库写失败，则直接返回失败</strong>，同时也不再写新库了</p>
+</li>
+<li><p><strong>不能让新库影响到现有业务的可用性和数据准确性</strong></p>
+</li>
+<li><p>数据不一致：<strong>比对和补偿的程序</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>灰度发布的方式把读请求逐步切换到新库上</strong></p>
+</li>
+<li><p><strong>全部读请求都切换到新库上之后</strong></p>
+<ul>
+<li><p><strong>停掉比对程序，把服务的写状态改为只写新库。至此，旧库就可以下线了（只有这个步骤是不可逆的）</strong></p>
+</li>
+<li><p>过渡状态：<strong>从双写以旧库为准过渡到双写以新库为准。然后把比对和补偿程序反过来，用新库的数据补偿旧库的数据（成本太高）</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>在下一次升级服务版本时下线双写功能</strong></p>
+</li>
+</ol>
+<p>关于数据表的变更：</p>
+<ul>
+<li><p>如果只是新增表，直接回退到旧版本程序</p>
+</li>
+<li><p>如果牵涉到<strong>表字段的变化</strong>，<strong>双写新旧表并设计热切换开关</strong>。</p>
+</li>
+</ul>
+<h2 id="比对和补偿程序"><a href="#比对和补偿程序" class="headerlink" title="比对和补偿程序"></a>比对和补偿程序</h2><ol>
+<li><p><strong>发现不一致的情况后，直接用旧库的订单数据覆盖新库的订单数据就可以了</strong></p>
+</li>
+<li><p><strong>每次从旧库中读取一个更新时间窗口内的数据，到新库中查找具有相同主键的数据进行比对</strong></p>
+<ol>
+<li><p><strong>如果新库数据的更新时间晚于旧库数据，那么很可能是比对期间数据发生了变化，这种情况暂时不要补偿，放到下个时间窗口继续进行比对即可。</strong></p>
+</li>
+<li><p><strong>时间窗口的结束时间不要选取当前时间，而是要比当前时间早一点，比如1分钟之前，这样就可以避免比对正在写入的数据了。</strong></p>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>如果数据没带时间戳信息，那就只能从旧库中读取Binlog</strong></p>
+<h2 id="数据备份和恢复：通过定期的全量备份配合-Binlog，我们可以把数据恢复到任意一个时间点"><a href="#数据备份和恢复：通过定期的全量备份配合-Binlog，我们可以把数据恢复到任意一个时间点" class="headerlink" title="数据备份和恢复：通过定期的全量备份配合 Binlog，我们可以把数据恢复到任意一个时间点"></a>数据备份和恢复：<strong>通过定期的全量备份配合 Binlog，我们可以把数据恢复到任意一个时间点</strong></h2><ol>
+<li><p><strong>不要把所有的鸡蛋放在同一个篮子中</strong></p>
+</li>
+<li><p><strong>指定的起始时间可以比全量备份的时间稍微提前一点儿</strong></p>
+<ul>
+<li><strong>为了确保回放的幂等性，需要将Binlog的格式设置为ROW格式</strong></li>
+</ul>
+</li>
+</ol>
 
 </div>
 

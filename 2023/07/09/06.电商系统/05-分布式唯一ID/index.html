@@ -543,6 +543,66 @@
 <li><strong>做一层重试，然后上报报警系统</strong>，更或者是发现有时钟回拨之后<strong>自动摘除本身节点并报警</strong></li>
 </ol>
 <p>从美团的实际运行情况来看，在2017 年闰秒出现那一次出现过部分机器回拨，由于Leaf-snowflake 的策略保证，成功避免了对业务造成的影响。<br>Leaf 在美团点评公司内部服务包含金融、支付交易、餐饮、外卖、酒店旅游猫眼电影等众多业务线。目前Leaf 的性能在4C8G 的机器上QPS 能压测到近<strong>5万&#x2F;s</strong>，TP999 1ms，已经能够满足大部分的业务的需求。每天提供亿数量级的调用量。</p>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><p>要求：全局唯一性、单调（趋势）递增、信息安全（不能泄露订单量）</p>
+<h2 id="UUID：MAC-地址泄露、无序（数据库主键无序导致B树频繁变动）"><a href="#UUID：MAC-地址泄露、无序（数据库主键无序导致B树频繁变动）" class="headerlink" title="UUID：MAC 地址泄露、无序（数据库主键无序导致B树频繁变动）"></a>UUID：MAC 地址泄露、无序（数据库主键无序导致B树频繁变动）</h2><h2 id="雪花算法：时钟回拨"><a href="#雪花算法：时钟回拨" class="headerlink" title="雪花算法：时钟回拨"></a>雪花算法：<strong>时钟回拨</strong></h2><h2 id="Mongdb-ObjectID-1"><a href="#Mongdb-ObjectID-1" class="headerlink" title="Mongdb ObjectID"></a>Mongdb ObjectID</h2><h2 id="Seata-UUID：io-seata-common-util-IdWorker"><a href="#Seata-UUID：io-seata-common-util-IdWorker" class="headerlink" title="Seata UUID：io.seata.common.util.IdWorker"></a>Seata UUID：<code>io.seata.common.util.IdWorker</code></h2><h2 id="MySQL：泄露发号数量、增加数据库压力"><a href="#MySQL：泄露发号数量、增加数据库压力" class="headerlink" title="MySQL：泄露发号数量、增加数据库压力"></a>MySQL：<strong>泄露发号数量、增加数据库压力</strong></h2><ul>
+<li><p><strong>多部署几台机器，每台机器设置不同的初始值，且步长和机器数相等</strong></p>
+<ul>
+<li><p><strong>水平扩展比较困难</strong></p>
+</li>
+<li><p><strong>没有了单调递增的特性（不同机器只能保证趋势递增）</strong></p>
+</li>
+<li><p>每次只获取一个ID，数据库压力依然很大</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Redis：持久化数据时存在着丢失数据的可能"><a href="#Redis：持久化数据时存在着丢失数据的可能" class="headerlink" title="Redis：持久化数据时存在着丢失数据的可能"></a>Redis：<strong>持久化数据时存在着丢失数据的可能</strong></h2><h2 id="Leaf-segment-1"><a href="#Leaf-segment-1" class="headerlink" title="Leaf-segment"></a>Leaf-segment</h2><ul>
+<li><p><strong>泄露发号数量</strong></p>
+</li>
+<li><p>TP999<strong>偶尔的尖刺</strong></p>
+<ul>
+<li><p><strong>双buffer优化：</strong></p>
+<ul>
+<li><p><strong>下发10%时更新下一个号段，下发完后切换到下个号段</strong></p>
+</li>
+<li><p><strong>segment长度设置为服务高峰期发号QPS的600倍（10 分钟），DB宕机时Leaf 仍能持续发号10-20 分钟</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>Leaf 高可用容灾（一主两从）：</strong>DBProxy(360), Paxos(强一致)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Leaf-snowflake-1"><a href="#Leaf-snowflake-1" class="headerlink" title="Leaf-snowflake"></a>Leaf-snowflake</h2><ul>
+<li><p><strong>使用Zookeeper配置workerid，本地缓存workerid文件</strong></p>
+</li>
+<li><p><strong>解决时钟问题</strong></p>
+<ul>
+<li><p>新节点启动时计算<strong>sum(time)&#x2F;nodeSize是否超过阈值</strong></p>
+</li>
+<li><p>老节点每隔一段时间上报自身系统时间</p>
+</li>
+<li><p>老节点比较zookeeper上本节点曾经的记录时间</p>
+</li>
+<li><p>老节点比较所有运行中的节点时间</p>
+</li>
+</ul>
+</li>
+<li><p>出现时钟回拨</p>
+<ul>
+<li><p><strong>直接关闭NTP同步</strong></p>
+</li>
+<li><p><strong>直接不提供服务返回ERROR_CODE，等时钟追上</strong></p>
+</li>
+<li><p><strong>做一层重试，然后上报报警系统</strong></p>
+</li>
+<li><p><strong>自动摘除本身节点并报警</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Leaf 的性能在4C8G 的机器上QPS 能压测到近<strong>5万&#x2F;s</strong>，TP999 1ms</p>
 
 </div>
 

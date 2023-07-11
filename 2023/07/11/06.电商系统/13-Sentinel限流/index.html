@@ -521,6 +521,86 @@
 </ul>
 </li>
 </ul>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="限流-1"><a href="#限流-1" class="headerlink" title="限流"></a>限流</h2><ul>
+<li><p>前端限流</p>
+</li>
+<li><p>接入层nginx限流</p>
+</li>
+<li><p>网关限流</p>
+<ul>
+<li><p>基于redis+lua脚本限流（RequestRateLimiter，令牌桶）</p>
+</li>
+<li><p>sentinel限流</p>
+<ul>
+<li><p>route维度限流：针对请求属性进行流控</p>
+</li>
+<li><p>API维度限流</p>
+</li>
+<li><p>规则持久化</p>
+<ul>
+<li><p>改造Sentinel控制台（指定端口和nacos配置中心地址）</p>
+</li>
+<li><p>网关规则实体转换： RuleEntity#toRule； ApiDefinitionEntity#toApiDefinition； GatewayFlowRuleEntity#toGatewayFlowRule</p>
+</li>
+<li><p>json解析丢失数据：重写实体类MyApiDefinition,再转换为ApiDefinition</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>应用层限流（微服务接入sentinel）</p>
+<ul>
+<li><p>匀速排队限流：处理间隔性突发的流量（漏桶算法）</p>
+<ul>
+<li>暂时不支持 QPS &gt; 1000 的场景</li>
+</ul>
+</li>
+<li><p>热点参数限流（<code>@SentinelResource(&quot;resourceName&quot;)</code>）</p>
+<ul>
+<li>参数必须是7种基本数据类型才会生效</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="降级-1"><a href="#降级-1" class="headerlink" title="降级"></a>降级</h2><ul>
+<li><p>自动化运维</p>
+<ul>
+<li><p>自动开关降级（超时、失败次数、故障、限流）</p>
+</li>
+<li><p>手动开关降级</p>
+</li>
+</ul>
+</li>
+<li><p>功能维度：读服务降级、写服务降级</p>
+</li>
+<li><p>系统层次维度：JS降级开关、接入层降级开关、应用层降级开关（OpenFeign整合Sentinel）</p>
+</li>
+</ul>
+<h2 id="拒绝服务-1"><a href="#拒绝服务-1" class="headerlink" title="拒绝服务"></a>拒绝服务</h2><ul>
+<li><p>系统资源过载保护</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nginx-http-sysguard">Nginx过载保护</a></p>
+</li>
+<li><p>Sentinel自适应限流</p>
+<ul>
+<li><p>Load 自适应（Linux&#x2F;Unix­like）：参考值 CPU cores * 2.5</p>
+</li>
+<li><p>CPU usage：比较灵敏</p>
+</li>
+<li><p>平均 RT：单位是毫秒</p>
+</li>
+<li><p>并发线程数</p>
+</li>
+<li><p>入口 QPS</p>
+</li>
+<li><p>系统规则持久化（system‐rules.nacos）</p>
+</li>
+</ul>
+</li>
+</ul>
 
 </div>
 

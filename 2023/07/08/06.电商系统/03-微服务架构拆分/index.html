@@ -491,6 +491,50 @@
 </ul>
 </li>
 </ul>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="微服务拆分时机-1"><a href="#微服务拆分时机-1" class="headerlink" title="微服务拆分时机"></a>微服务拆分时机</h2><p><strong>业务规模、团队规模、技术储备、人才储备、研发效率</strong></p>
+<h2 id="微服务拆分原则-1"><a href="#微服务拆分原则-1" class="headerlink" title="微服务拆分原则"></a>微服务拆分原则</h2><ul>
+<li><p>单一服务内部功能<strong>高内聚低耦合</strong></p>
+</li>
+<li><p><strong>闭包原则</strong>（CCP）</p>
+</li>
+<li><p><strong>服务自治、接口隔离</strong>原则</p>
+</li>
+<li><p><strong>持续演进</strong>原则</p>
+</li>
+<li><p><strong>避免影响产品的日常功能迭代</strong></p>
+</li>
+<li><p><strong>服务接口的定义要具备可扩展性</strong></p>
+</li>
+<li><p><strong>避免环形依赖与双向依赖</strong></p>
+</li>
+<li><p><strong>阶段性合并</strong></p>
+</li>
+<li><p><strong>自动化驱动</strong></p>
+</li>
+</ul>
+<h2 id="功能维度拆分策略：领域驱动、数据驱动、单体拆分"><a href="#功能维度拆分策略：领域驱动、数据驱动、单体拆分" class="headerlink" title="功能维度拆分策略：领域驱动、数据驱动、单体拆分"></a>功能维度拆分策略：领域驱动、数据驱动、单体拆分</h2><ul>
+<li><p><strong>业务复杂度足够高：基于领域驱动拆分服务</strong></p>
+</li>
+<li><p><strong>业务复杂度较低：基于数据驱动拆分服务</strong></p>
+</li>
+</ul>
+<h2 id="非功能维度拆分策略：扩展性、复用性、高性能、高可用、安全性、异构性"><a href="#非功能维度拆分策略：扩展性、复用性、高性能、高可用、安全性、异构性" class="headerlink" title="非功能维度拆分策略：扩展性、复用性、高性能、高可用、安全性、异构性"></a>非功能维度拆分策略：<strong>扩展性、复用性、高性能、高可用、安全性、异构性</strong></h2><h2 id="拆分注意的风险-1"><a href="#拆分注意的风险-1" class="headerlink" title="拆分注意的风险"></a>拆分注意的风险</h2><ul>
+<li><p><strong>能否驾驭微服务的技术栈</strong></p>
+</li>
+<li><p><strong>不断纠正</strong></p>
+</li>
+<li><p><strong>不要纠结怎么拆，先拆了再说，发现不合适再重新调整</strong></p>
+</li>
+<li><p><strong>如果拆了之后发现真的不合适，在重新调整就好了</strong>：合并后的包内服务也要满足微服务定义（DDD），以便日后拆分</p>
+</li>
+</ul>
+<p><strong>微服务架构注意事项</strong></p>
+<ul>
+<li><p>使用 RequestInterceptor 接口设置请求头传递 memberId</p>
+</li>
+<li><p>Skywalking + ELK</p>
+</li>
+</ul>
 
 </div>
 

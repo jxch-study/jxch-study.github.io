@@ -482,6 +482,81 @@
 </li>
 </ol>
 <p>对用户则来说，用户需要分别实现本地事务执行以及本地事务回查方法（<code>RocketMQLocalTransactionListener</code>），因此只需关注本地事务的执行状态即可。</p>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="Seata架构：TC、TM、RM"><a href="#Seata架构：TC、TM、RM" class="headerlink" title="Seata架构：TC、TM、RM"></a>Seata架构：TC、TM、RM</h2><p>1. TM 请求 TC 开启一个全局事务。TC 会生成一个 XID 作为该全局事务的编号。XID会在微服务的调用链路中传播，保证将多个微服务的子事务关联在一起。<br>2. RM 请求 TC 将本地事务注册为全局事务的分支事务，通过全局事务的 XID 进行关联。<br>3. TM 请求 TC 告诉 XID 对应的全局事务是进行提交还是回滚。<br>4. TC 驱动 RM 们将 XID 对应的自己的本地事务进行提交还是回滚。</p>
+<h2 id="分库分表全局事务（ShardingSphere）-1"><a href="#分库分表全局事务（ShardingSphere）-1" class="headerlink" title="分库分表全局事务（ShardingSphere）"></a>分库分表全局事务（ShardingSphere）</h2><ol>
+<li><p><strong>配置seata.conf</strong></p>
+<ul>
+<li><pre><code>  client &#123;
+      application.id = tulingmall‐order‐curr
+      transaction.service.group = tuling‐order‐group
+  &#125;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>开启全局事务配置</strong></p>
+<ul>
+<li><p>@ShardingTransactionType(TransactionType.BASE)</p>
+</li>
+<li><p>@Transactional</p>
+</li>
+</ul>
+</li>
+<li><p><strong>关闭Seata数据源自动代理</strong></p>
+<ul>
+<li>seata.enable‐auto‐data‐source‐proxy&#x3D;false</li>
+</ul>
+</li>
+</ol>
+<h2 id="柔性事务：可靠消息最终一致性-1"><a href="#柔性事务：可靠消息最终一致性-1" class="headerlink" title="柔性事务：可靠消息最终一致性"></a>柔性事务：可靠消息最终一致性</h2><h2 id="本地消息表方案-1"><a href="#本地消息表方案-1" class="headerlink" title="本地消息表方案"></a>本地消息表方案</h2><ol>
+<li><p><strong>定时任务扫描日志</strong></p>
+<ul>
+<li>启动独立的线程，定时对消息日志表中的消息进行扫描并发送至消息中间件，在消息中间件反馈发送成功后删除该消息日志，否则等待定时任务下一周期重试。</li>
+</ul>
+</li>
+<li><p><strong>消费消息（幂等控制）</strong></p>
+<ul>
+<li>使用MQ的ack（即消息确认）机制，消费者监听MQ，如果消费者接收到消息并且业务处理完成后向MQ发送ack（即消息确认），此时说明消费者正常消费消息完成，MQ将不再向消费者推送消息，否则消费者会不断重试向消费者来发送消息。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Rocketmq事务消息-1"><a href="#Rocketmq事务消息-1" class="headerlink" title="Rocketmq事务消息"></a>Rocketmq事务消息</h2><p>解决Producer端的<strong>消息发送与本地事务执行的原子性</strong>问题</p>
+<ol>
+<li><p>Producer发送事务消息</p>
+<ul>
+<li>Producer（MQ发送方）发送事务消息至MQ Server，MQ Server将消息状态标记为Prepared（预览状态），注意此时这条消息消费者（MQ订阅方）是无法消费到的。</li>
+</ul>
+</li>
+<li><p>MQ Server回应消息发送成功</p>
+<ul>
+<li>MQ Server接收到Producer发送的消息则回应发送成功表示MQ已接收到消息。</li>
+</ul>
+</li>
+<li><p>Producer执行本地事务</p>
+</li>
+<li><p>消息投递</p>
+<ul>
+<li><p>若Producer本地事务执行成功则自动向MQ Server发送commit消息</p>
+</li>
+<li><p>MQ Server接收到commit消息后将“该消息”状态标记为可消费，此时MQ订阅方即正常消费消息；</p>
+</li>
+<li><p>若Producer 本地事务执行失败则自动向MQ Server发送rollback消息，MQ Server接收到rollback消息后将删除“该消息”。</p>
+</li>
+<li><p>MQ订阅方消费消息，消费成功则向MQ回应ack，否则将重复接收消息。这里ack默认自动回应，即程序执行正常则自动回应ack。</p>
+</li>
+</ul>
+</li>
+<li><p>事务回查</p>
+<ul>
+<li>如果执行Producer端本地事务过程中，执行端挂掉，或者超时，MQ Server将会不停的询问同组的其他Producer来获取事务执行状态，这个过程叫事务回查。MQ Server会根据事务回查结果来决定是否投递消息。</li>
+</ul>
+</li>
+<li><p><strong>需要分别实现本地事务执行以及本地事务回查方法</strong></p>
+<ul>
+<li><code>RocketMQLocalTransactionListener</code></li>
+</ul>
+</li>
+</ol>
 
 </div>
 
