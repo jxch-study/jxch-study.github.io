@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		13.Sentinel限流 | 
+		01.DDD设计思想 | 
 	 
 	架构师
 	</title>
@@ -346,7 +346,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/13-Sentinel%E9%99%90%E6%B5%81/">
                      
 										    13.Sentinel限流
@@ -412,7 +412,7 @@
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/01.DDD%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">
                      
 										    01.DDD设计思想
@@ -444,7 +444,7 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<h1 id="article-title">
-	13.Sentinel限流
+	01.DDD设计思想
 </h1>
 
 <!-- meta -->
@@ -452,7 +452,7 @@
 	
 
 	<span>姜希成</span>
-	<span>2023-07-11 09:46:23</span>
+	<span>2023-07-13 20:58:02</span>
 
   <div id="article-categories">
     
@@ -461,7 +461,7 @@
           
               <span>
                   <i class="fa fa-folder" aria-hidden="true">
-                  <a href="/categories/电商系统/">电商系统</a>
+                  <a href="/categories/DDD/">DDD</a>
                   </i>
                 
               </span>
@@ -475,7 +475,7 @@
             
                 <span>
                     <i class="fa fa-tag" aria-hidden="true">
-                    <a href="/tags/Sentinel/">Sentinel</a>
+                    <a href="/tags/DDD/">DDD</a>
                     </i>
                 </span>
             
@@ -487,171 +487,36 @@
 
 <!-- content -->
 <div id="article-content">
-	<p>针对电商系统，在遇到大流量时，更多考虑的是运行阶段如何保障系统的稳定运行，常用的手段：<strong>限流，降级，拒绝服务</strong>。</p>
-<h1 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h1><p>客户端限流</p>
+	<p>很多软件设计上的不足，表面上看，似乎是技术架构的问题。因为如果架构师经验足够丰富，就能提前考虑到这些问题。如果开发团队技术足够过硬，就可以最快速度解决这些问题。但是，如果你将视野放开，放到到整个项目团队。你就会发现，<strong>一味的要求技术人员能够未卜先知，这是不现实也是不理智的。</strong>尤其对于长期建设的大型项目，更是看如此。难道你要求当年开发淘宝时就要支持好双十一吗？DDD希望让整个软件团队都用统一的方式思考解决问题，减少架构师、程序员、产品经理、测试人员等各个参与角色之间的分歧。</p>
+<p>两个非常核心的思想：</p>
+<ol>
+<li><strong>技术主动理解业务</strong></li>
+<li><strong>“刚刚好”解决问题</strong></li>
+</ol>
+<h1 id="技术主动理解业务"><a href="#技术主动理解业务" class="headerlink" title="技术主动理解业务"></a>技术主动理解业务</h1><p><strong>Controller、Service等概念并不具备实际的业务价值。</strong>因此，业务专家设计出来的业务流程，总是需要产品人员进行梳理，以及技术人员设计才能最终落地到项目当中。而这其中，不可避免的会产生信息不对称的情况。尤其在面对频繁变化的复杂业务时。</p>
+<p>比如业务专家看到的是消息转发、历史请求管理、应用注册管理这三个业务能力，不管多复杂的业务场景，基于这三个能力进行组织就行。但是在技术人员的视野中，却显然更关注MVC的三层架构。会更注重Controller、Service这样一个个技术层面的逻辑分工与复用。当业务需求发生变化后，业务专家考虑的是如何通过这三种业务能力将整个业务场景贯穿起来。而技术专家往往会更多的考虑新的结构对以往的架构有多大的冲突。<strong>如果新的设计对已有的架构造成太大的冲突，就只能考虑重构。而重构对于业务专家来说，没有什么业务价值。</strong></p>
+<p>DDD则是主动强调让技术贴近业务，<strong>鼓励形成团队内部的通用语言，业务如何组织，软件就如何构建</strong>。让不怎么懂技术的业务专家也能主动参与到软件建设的整个过程当中，而不仅仅是前期的需求设计。</p>
+<p>在DDD的实践过程当中，有很多技术人员容易陷入以往的技术思维中，将DDD理解成某种技术架构，将组件描述成技术实现（用原来技术架构硬套在DDD上，改了个包名而已，领域专家看了依然是一脸懵逼）。相反，更应该体现业务属性，<strong>让领域专家看到这样的组件，即便不了解实现细节，也能够知道这些组件是干什么的，从而有可能继续深入的参与软件建设过程。</strong></p>
+<h1 id="“刚刚好”解决问题"><a href="#“刚刚好”解决问题" class="headerlink" title="“刚刚好”解决问题"></a>“刚刚好”解决问题</h1><p>在以往的设计过程中，为了更多的兼容日后的需求变化，技术人员往往会做很多的“提前设计”。寄希望于这些“提前设计”能够减少未来业务变化对软件架构的冲击。但是，<strong>往往项目未来的需求变化并不是技术人员能够把控的。如果未来的业务需求不是按照之前设计的路线演进，这些“提前设计“不但无法起到设计时的作用，反而会增加软件项目的复杂度</strong>，从而给软件后续的升级改造带来更多的负担。而DDD强调的则是<strong>让软件可以”刚刚好“的解决眼前的业务问题，同时为软件保持足够的灵活性。</strong></p>
+<p>以DDD中的Repository仓库组件为例。在DDD设计中，我们会将实体的持久化逻辑全部交由仓库组件负责，在业务流程中不需要考虑持久化相关的逻辑。当我们需要设计更复杂的持久化策略时，就只需要调整仓库层的实现，而不需要考虑业务上有什么影响。比如，往往很多项目在最初的设计中，都会选择将关键业务信息通过MyBatis这样的框架直接存入到数据库。但是如果软件的并发量逐渐增大，往往我们就需要增加一个Redis缓存层，用来保护数据库，提高系统的并发能力。而围绕Redis缓存，各种缓存穿透、缓存击穿、缓存雪崩、缓存预热等等这样的一些业务逻辑就自然而然的冒出来了。这样一个简单的MyBatis就不够用了。如果没有抽象出Repository仓库层，那么这些新增加的逻辑就不可避免的要蔓延到上层的DAO或者Service当中。但是，<strong>如果抽象出了Repository仓库层，不管多复杂的持久化逻辑，都只是一个仓库实现而已，不会对业务造成任何影响。这些需求就可以比较独立的进行改造。</strong></p>
+<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><ul>
+<li><p><strong>技术主动理解业务</strong></p>
 <ul>
-<li>好处：可以限制请求的发出，通过减少发出无用请求从而减少对系统的消耗。</li>
-<li>缺点：当客户端比较分散时，没法设置合理的限流阈值：如果阈值设的太小，会导致服务端没有达到瓶颈时客户端已经被限制；而如果设的太大，则起不到限制的作用。</li>
+<li><p>Controller、Service等概念并不具备实际的业务价值</p>
+</li>
+<li><p>如果新的设计对已有的架构造成太大的冲突，就只能考虑重构。而重构对于业务专家来说，没有什么业务价值</p>
+</li>
+<li><p>鼓励形成团队内部的通用语言，业务如何组织，软件就如何构建</p>
+</li>
+<li><p>让领域专家看到这样的组件，即便不了解实现细节，也能够知道这些组件是干什么的，从而有可能继续深入的参与软件建设过程</p>
+</li>
 </ul>
-<p>服务端限流</p>
+</li>
+<li><p><strong>“刚刚好”解决问题：</strong></p>
 <ul>
-<li>好处：可以根据服务端的性能设置合理的阈值</li>
-<li>缺点：被限制的请求都是无效的请求，处理这些无效的请求本身也会消耗服务器资源。</li>
-</ul>
-<p>在限流的实现手段上来讲，基于 QPS 和线程数的限流应用最多，最大 QPS 很容易通过压测提前获取。线程数限流在客户端比较有效，例如在远程调用时我们设置连接池的线程数，超出这个并发线程请求，就将线程进行排队或者直接超时丢弃。限流必然会导致一部分用户请求失败，因此在系统处理这种异常时一定要设置超时时间，防止因被限流的请求不能 fast fail（快速失败）而拖垮系统。</p>
-<p>限流的方案</p>
-<ul>
-<li>前端限流</li>
-<li>接入层nginx限流</li>
-<li>网关限流     <ul>
-<li>基于redis+lua脚本限流（RequestRateLimiter过滤器工厂，令牌桶）</li>
-<li>sentinel限流<ul>
-<li>route维度限流<ul>
-<li>针对请求属性进行流控</li>
-</ul>
+<li><p>往往项目未来的需求变化并不是技术人员能够把控的。如果未来的业务需求不是按照之前设计的路线演进，这些“提前设计“不但无法起到设计时的作用，反而会增加软件项目的复杂度</p>
 </li>
-<li>API维度限流</li>
-<li>规则持久化<ul>
-<li>启动持久化改造后的Sentinel控制台（指定端口和nacos配置中心地址）</li>
-<li>网关规则改造的坑<ul>
-<li>网关规则实体转换<ul>
-<li>RuleEntity#toRule</li>
-<li>ApiDefinitionEntity#toApiDefinition</li>
-<li>GatewayFlowRuleEntity#toGatewayFlowRule</li>
-</ul>
-</li>
-<li>json解析丢失数据<ul>
-<li>ApiDefinition的属性<code>Set&lt;ApiPredicateItem&gt; predicateItems</code>中元素是接口类型，JSON解析丢失数据</li>
-<li>重写实体类MyApiDefinition,再转换为ApiDefinition</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>应用层限流 <ul>
-<li>微服务接入sentinel<ul>
-<li>匀速排队限流<ul>
-<li>Sentinel<strong>匀速排队</strong>方式会严格控制请求通过的间隔时间，也即是让请求以均匀的速度通过，对应的是漏桶算法。</li>
-<li>这种方式主要用于处理间隔性突发的流量（匀速排队模式暂时不支持 QPS &gt; 1000 的场景）</li>
-</ul>
-</li>
-<li>热点参数限流<ul>
-<li>热点参数限流会统计传入参数中的热点参数，并根据配置的限流阈值与模式，对包含热点参数的资源调用进行限流。</li>
-<li>热点规则需要使用<code>@SentinelResource(&quot;resourceName&quot;)</code>注解，否则不生效</li>
-<li>参数必须是7种基本数据类型才会生效</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h1><p>降级就是当系统的容量达到一定程度时，限制或者关闭系统的某些非核心功能，从而把有限的资源保留给更核心的业务。降级的核心目标是牺牲次要的功能和用户体验来保证核心业务流程的稳定，是一个不得已而为之的举措。</p>
-<p>服务降级的策略</p>
-<ul>
-<li>自动化运维<ul>
-<li>自动开关降级（超时、失败次数、故障、限流）</li>
-<li>手动开关降级</li>
-</ul>
-</li>
-<li>功能维度：读服务降级、写服务降级</li>
-<li>系统层次维度：JS降级开关、接入层降级开关、应用层降级开关（OpenFeign整合Sentinel）</li>
-</ul>
-<h1 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h1><p>拒绝服务可以说是一种不得已的兜底方案，用以防止最坏情况发生，防止因把服务器压跨而长时间彻底无法提供服务。</p>
-<ul>
-<li>系统资源过载保护 </li>
-<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/nginx-http-sysguard">Nginx过载保护</a></li>
-<li>Sentinel自适应限流<ul>
-<li>Load 自适应（仅对 Linux&#x2F;Unix­like 机器生效）：系统的 load1 作为启发指标，进行自适应系统保护。当系统 load1 超过设定的启发值，且系统当前的并发线程数超过估算的系统容量时才会触发系统保护（BBR 阶段）。系统容量由系统的 maxQps * minRt 估算得出。设定参考值一般是 CPU cores * 2.5。</li>
-<li>CPU usage（1.5.0+ 版本）：当系统 CPU 使用率超过阈值即触发系统保护（取值范围 0.0-­1.0），比较灵敏。</li>
-<li>平均 RT：当单台机器上所有入口流量的平均 RT 达到阈值即触发系统保护，单位是毫秒。</li>
-<li>并发线程数：当单台机器上所有入口流量的并发线程数达到阈值即触发系统保护。</li>
-<li>入口 QPS：当单台机器上所有入口流量的 QPS 达到阈值即触发系统保护。</li>
-<li>系统规则持久化yml配置<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">system‐rules:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">  <span class="string">server‐addr:</span> <span class="number">192.168</span><span class="number">.65</span><span class="number">.103</span><span class="string">:8848</span></span><br><span class="line">  <span class="string">dataId:</span> <span class="string">$&#123;spring.application.name&#125;‐system‐rules</span></span><br><span class="line">  <span class="string">groupId:</span> <span class="string">SENTINEL_GROUP</span></span><br><span class="line">  <span class="string">data‐type:</span> <span class="string">json</span></span><br><span class="line">  <span class="string">rule‐type:</span> <span class="string">system</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="限流-1"><a href="#限流-1" class="headerlink" title="限流"></a>限流</h2><ul>
-<li><p>前端限流</p>
-</li>
-<li><p>接入层nginx限流</p>
-</li>
-<li><p>网关限流</p>
-<ul>
-<li><p>基于redis+lua脚本限流（RequestRateLimiter，令牌桶）</p>
-</li>
-<li><p>sentinel限流</p>
-<ul>
-<li><p>route维度限流：针对请求属性进行流控</p>
-</li>
-<li><p>API维度限流</p>
-</li>
-<li><p>规则持久化</p>
-<ul>
-<li><p>改造Sentinel控制台（指定端口和nacos配置中心地址）</p>
-</li>
-<li><p>网关规则实体转换： RuleEntity#toRule； ApiDefinitionEntity#toApiDefinition； GatewayFlowRuleEntity#toGatewayFlowRule</p>
-</li>
-<li><p>json解析丢失数据：重写实体类MyApiDefinition,再转换为ApiDefinition</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>应用层限流（微服务接入sentinel）</p>
-<ul>
-<li><p>匀速排队限流：处理间隔性突发的流量（漏桶算法）</p>
-<ul>
-<li>暂时不支持 QPS &gt; 1000 的场景</li>
-</ul>
-</li>
-<li><p>热点参数限流（<code>@SentinelResource(&quot;resourceName&quot;)</code>）</p>
-<ul>
-<li>参数必须是7种基本数据类型才会生效</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="降级-1"><a href="#降级-1" class="headerlink" title="降级"></a>降级</h2><ul>
-<li><p>自动化运维</p>
-<ul>
-<li><p>自动开关降级（超时、失败次数、故障、限流）</p>
-</li>
-<li><p>手动开关降级</p>
-</li>
-</ul>
-</li>
-<li><p>功能维度：读服务降级、写服务降级</p>
-</li>
-<li><p>系统层次维度：JS降级开关、接入层降级开关、应用层降级开关（OpenFeign整合Sentinel）</p>
-</li>
-</ul>
-<h2 id="拒绝服务-1"><a href="#拒绝服务-1" class="headerlink" title="拒绝服务"></a>拒绝服务</h2><ul>
-<li><p>系统资源过载保护</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nginx-http-sysguard">Nginx过载保护</a></p>
-</li>
-<li><p>Sentinel自适应限流</p>
-<ul>
-<li><p>Load 自适应（Linux&#x2F;Unix­like）：参考值 CPU cores * 2.5</p>
-</li>
-<li><p>CPU usage：比较灵敏</p>
-</li>
-<li><p>平均 RT：单位是毫秒</p>
-</li>
-<li><p>并发线程数</p>
-</li>
-<li><p>入口 QPS</p>
-</li>
-<li><p>系统规则持久化（system‐rules.nacos）</p>
+<li><p>同时为软件保持足够的灵活性，比如：如果抽象出了Repository仓库层，不管多复杂的持久化逻辑，都只是一个仓库实现而已，不会对业务造成任何影响。这些需求就可以比较独立的进行改造</p>
 </li>
 </ul>
 </li>
@@ -664,16 +529,16 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
+              <a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/02.DDD%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
                   <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  14.高并发读写
+                  02.DDD四层架构设计
               </a>
             
         </div>
         <div class="item right">
             
-              <a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/12-%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/">
-                12.秒杀系统
+              <a href="/2023/07/13/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-06-%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/">
+                05-06.电商系统
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             

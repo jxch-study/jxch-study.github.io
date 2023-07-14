@@ -8,8 +8,6 @@
 	<!-- title -->
 	
 	<title>
-	
-		13.Sentinel限流 | 
 	 
 	架构师
 	</title>
@@ -346,7 +344,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/13-Sentinel%E9%99%90%E6%B5%81/">
                      
 										    13.Sentinel限流
@@ -443,254 +441,45 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<h1 id="article-title">
-	13.Sentinel限流
-</h1>
-
-<!-- meta -->
-<div class="article-meta">
+		<div id="index">
 	
-
-	<span>姜希成</span>
-	<span>2023-07-11 09:46:23</span>
-
-  <div id="article-categories">
-    
-		  <span>Categories：</span>
-      
-          
-              <span>
-                  <i class="fa fa-folder" aria-hidden="true">
-                  <a href="/categories/电商系统/">电商系统</a>
-                  </i>
-                
-              </span>
-          
-      
-    
-
-    
-		    <span>Tags：</span>
-        
-            
-                <span>
-                    <i class="fa fa-tag" aria-hidden="true">
-                    <a href="/tags/Sentinel/">Sentinel</a>
-                    </i>
-                </span>
-            
-        
-    
-  </div>
-
+		<div class="index-li">
+			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/01-%E5%8D%95%E4%BD%93VS%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+				<h2 class="index-title">
+					01.单体VS微服务
+				</h2>
+				<div class="index-brief">
+					单体服务的优点
+应用的开发很简单，IDE 和其他开发工具只需要构建这一个单独的应用程序
+易于对应用程序进行大规模的更改:可以更改代码和数据库模式，然后构建和部署测试相对简单。
+开发测试简单:开发者只需要写几个端到端的测试,启动应用程序，调用 RESTAPI，然后使用 Selenium 这样的工具测试
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2023-07-08</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/电商系统/">电商系统</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+	
+	<div id="index-paginator">
+		
+			<a class="extend prev" rel="prev" href="/page/2/">&lt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+		
+	</div>
 </div>
 
-<!-- content -->
-<div id="article-content">
-	<p>针对电商系统，在遇到大流量时，更多考虑的是运行阶段如何保障系统的稳定运行，常用的手段：<strong>限流，降级，拒绝服务</strong>。</p>
-<h1 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h1><p>客户端限流</p>
-<ul>
-<li>好处：可以限制请求的发出，通过减少发出无用请求从而减少对系统的消耗。</li>
-<li>缺点：当客户端比较分散时，没法设置合理的限流阈值：如果阈值设的太小，会导致服务端没有达到瓶颈时客户端已经被限制；而如果设的太大，则起不到限制的作用。</li>
-</ul>
-<p>服务端限流</p>
-<ul>
-<li>好处：可以根据服务端的性能设置合理的阈值</li>
-<li>缺点：被限制的请求都是无效的请求，处理这些无效的请求本身也会消耗服务器资源。</li>
-</ul>
-<p>在限流的实现手段上来讲，基于 QPS 和线程数的限流应用最多，最大 QPS 很容易通过压测提前获取。线程数限流在客户端比较有效，例如在远程调用时我们设置连接池的线程数，超出这个并发线程请求，就将线程进行排队或者直接超时丢弃。限流必然会导致一部分用户请求失败，因此在系统处理这种异常时一定要设置超时时间，防止因被限流的请求不能 fast fail（快速失败）而拖垮系统。</p>
-<p>限流的方案</p>
-<ul>
-<li>前端限流</li>
-<li>接入层nginx限流</li>
-<li>网关限流     <ul>
-<li>基于redis+lua脚本限流（RequestRateLimiter过滤器工厂，令牌桶）</li>
-<li>sentinel限流<ul>
-<li>route维度限流<ul>
-<li>针对请求属性进行流控</li>
-</ul>
-</li>
-<li>API维度限流</li>
-<li>规则持久化<ul>
-<li>启动持久化改造后的Sentinel控制台（指定端口和nacos配置中心地址）</li>
-<li>网关规则改造的坑<ul>
-<li>网关规则实体转换<ul>
-<li>RuleEntity#toRule</li>
-<li>ApiDefinitionEntity#toApiDefinition</li>
-<li>GatewayFlowRuleEntity#toGatewayFlowRule</li>
-</ul>
-</li>
-<li>json解析丢失数据<ul>
-<li>ApiDefinition的属性<code>Set&lt;ApiPredicateItem&gt; predicateItems</code>中元素是接口类型，JSON解析丢失数据</li>
-<li>重写实体类MyApiDefinition,再转换为ApiDefinition</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>应用层限流 <ul>
-<li>微服务接入sentinel<ul>
-<li>匀速排队限流<ul>
-<li>Sentinel<strong>匀速排队</strong>方式会严格控制请求通过的间隔时间，也即是让请求以均匀的速度通过，对应的是漏桶算法。</li>
-<li>这种方式主要用于处理间隔性突发的流量（匀速排队模式暂时不支持 QPS &gt; 1000 的场景）</li>
-</ul>
-</li>
-<li>热点参数限流<ul>
-<li>热点参数限流会统计传入参数中的热点参数，并根据配置的限流阈值与模式，对包含热点参数的资源调用进行限流。</li>
-<li>热点规则需要使用<code>@SentinelResource(&quot;resourceName&quot;)</code>注解，否则不生效</li>
-<li>参数必须是7种基本数据类型才会生效</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h1><p>降级就是当系统的容量达到一定程度时，限制或者关闭系统的某些非核心功能，从而把有限的资源保留给更核心的业务。降级的核心目标是牺牲次要的功能和用户体验来保证核心业务流程的稳定，是一个不得已而为之的举措。</p>
-<p>服务降级的策略</p>
-<ul>
-<li>自动化运维<ul>
-<li>自动开关降级（超时、失败次数、故障、限流）</li>
-<li>手动开关降级</li>
-</ul>
-</li>
-<li>功能维度：读服务降级、写服务降级</li>
-<li>系统层次维度：JS降级开关、接入层降级开关、应用层降级开关（OpenFeign整合Sentinel）</li>
-</ul>
-<h1 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h1><p>拒绝服务可以说是一种不得已的兜底方案，用以防止最坏情况发生，防止因把服务器压跨而长时间彻底无法提供服务。</p>
-<ul>
-<li>系统资源过载保护 </li>
-<li><a target="_blank" rel="noopener" href="https://github.com/alibaba/nginx-http-sysguard">Nginx过载保护</a></li>
-<li>Sentinel自适应限流<ul>
-<li>Load 自适应（仅对 Linux&#x2F;Unix­like 机器生效）：系统的 load1 作为启发指标，进行自适应系统保护。当系统 load1 超过设定的启发值，且系统当前的并发线程数超过估算的系统容量时才会触发系统保护（BBR 阶段）。系统容量由系统的 maxQps * minRt 估算得出。设定参考值一般是 CPU cores * 2.5。</li>
-<li>CPU usage（1.5.0+ 版本）：当系统 CPU 使用率超过阈值即触发系统保护（取值范围 0.0-­1.0），比较灵敏。</li>
-<li>平均 RT：当单台机器上所有入口流量的平均 RT 达到阈值即触发系统保护，单位是毫秒。</li>
-<li>并发线程数：当单台机器上所有入口流量的并发线程数达到阈值即触发系统保护。</li>
-<li>入口 QPS：当单台机器上所有入口流量的 QPS 达到阈值即触发系统保护。</li>
-<li>系统规则持久化yml配置<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">system‐rules:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">  <span class="string">server‐addr:</span> <span class="number">192.168</span><span class="number">.65</span><span class="number">.103</span><span class="string">:8848</span></span><br><span class="line">  <span class="string">dataId:</span> <span class="string">$&#123;spring.application.name&#125;‐system‐rules</span></span><br><span class="line">  <span class="string">groupId:</span> <span class="string">SENTINEL_GROUP</span></span><br><span class="line">  <span class="string">data‐type:</span> <span class="string">json</span></span><br><span class="line">  <span class="string">rule‐type:</span> <span class="string">system</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><h2 id="限流-1"><a href="#限流-1" class="headerlink" title="限流"></a>限流</h2><ul>
-<li><p>前端限流</p>
-</li>
-<li><p>接入层nginx限流</p>
-</li>
-<li><p>网关限流</p>
-<ul>
-<li><p>基于redis+lua脚本限流（RequestRateLimiter，令牌桶）</p>
-</li>
-<li><p>sentinel限流</p>
-<ul>
-<li><p>route维度限流：针对请求属性进行流控</p>
-</li>
-<li><p>API维度限流</p>
-</li>
-<li><p>规则持久化</p>
-<ul>
-<li><p>改造Sentinel控制台（指定端口和nacos配置中心地址）</p>
-</li>
-<li><p>网关规则实体转换： RuleEntity#toRule； ApiDefinitionEntity#toApiDefinition； GatewayFlowRuleEntity#toGatewayFlowRule</p>
-</li>
-<li><p>json解析丢失数据：重写实体类MyApiDefinition,再转换为ApiDefinition</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>应用层限流（微服务接入sentinel）</p>
-<ul>
-<li><p>匀速排队限流：处理间隔性突发的流量（漏桶算法）</p>
-<ul>
-<li>暂时不支持 QPS &gt; 1000 的场景</li>
-</ul>
-</li>
-<li><p>热点参数限流（<code>@SentinelResource(&quot;resourceName&quot;)</code>）</p>
-<ul>
-<li>参数必须是7种基本数据类型才会生效</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="降级-1"><a href="#降级-1" class="headerlink" title="降级"></a>降级</h2><ul>
-<li><p>自动化运维</p>
-<ul>
-<li><p>自动开关降级（超时、失败次数、故障、限流）</p>
-</li>
-<li><p>手动开关降级</p>
-</li>
-</ul>
-</li>
-<li><p>功能维度：读服务降级、写服务降级</p>
-</li>
-<li><p>系统层次维度：JS降级开关、接入层降级开关、应用层降级开关（OpenFeign整合Sentinel）</p>
-</li>
-</ul>
-<h2 id="拒绝服务-1"><a href="#拒绝服务-1" class="headerlink" title="拒绝服务"></a>拒绝服务</h2><ul>
-<li><p>系统资源过载保护</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/nginx-http-sysguard">Nginx过载保护</a></p>
-</li>
-<li><p>Sentinel自适应限流</p>
-<ul>
-<li><p>Load 自适应（Linux&#x2F;Unix­like）：参考值 CPU cores * 2.5</p>
-</li>
-<li><p>CPU usage：比较灵敏</p>
-</li>
-<li><p>平均 RT：单位是毫秒</p>
-</li>
-<li><p>并发线程数</p>
-</li>
-<li><p>入口 QPS</p>
-</li>
-<li><p>系统规则持久化（system‐rules.nacos）</p>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-
-<!-- post-guide -->
-
-    <div class="post-guide">
-        <div class="item left">
-            
-              <a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  14.高并发读写
-              </a>
-            
-        </div>
-        <div class="item right">
-            
-              <a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/12-%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/">
-                12.秒杀系统
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-              </a>
-            
-        </div>
-    </div>
-
-
-<!-- comment - giscus -->
-
-
-<!-- comment - valine -->
-
-
-<script>
-	
-	
-</script>
 	</div>
 	<div id="footer">
 	<p>
