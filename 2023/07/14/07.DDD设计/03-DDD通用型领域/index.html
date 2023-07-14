@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		03.DDD通用型领域 | 
 	 
 	架构师
 	</title>
@@ -432,7 +434,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2023/07/14/07.DDD%E8%AE%BE%E8%AE%A1/03-DDD%E9%80%9A%E7%94%A8%E5%9E%8B%E9%A2%86%E5%9F%9F/">
                      
 										    03.DDD通用型领域
@@ -452,71 +454,93 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+	03.DDD通用型领域
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/02-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%9E%B6%E6%9E%84/">
-				<h2 class="index-title">
-					02.多数据源架构
-				</h2>
-				<div class="index-brief">
-					01. AbstractRoutingDataSource（Spring）1234567891011121314151617181920212223242526@Component@Primary public class DynamicDataSource extends AbstractRout
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/01-%E5%8D%95%E4%BD%93VS%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
-				<h2 class="index-title">
-					01.单体VS微服务
-				</h2>
-				<div class="index-brief">
-					单体服务的优点
-应用的开发很简单，IDE 和其他开发工具只需要构建这一个单独的应用程序
-易于对应用程序进行大规模的更改:可以更改代码和数据库模式，然后构建和部署测试相对简单。
-开发测试简单:开发者只需要写几个端到端的测试,启动应用程序，调用 RESTAPI，然后使用 Selenium 这样的工具测试
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-08</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-			<a class="extend prev" rel="prev" href="/page/2/">&lt;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-		
-	</div>
+
+	<span>姜希成</span>
+	<span>2023-07-14 10:16:18</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+          
+              <span>
+                  <i class="fa fa-folder" aria-hidden="true">
+                  <a href="/categories/DDD/">DDD</a>
+                  </i>
+                
+              </span>
+          
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+            
+                <span>
+                    <i class="fa fa-tag" aria-hidden="true">
+                    <a href="/tags/DDD/">DDD</a>
+                    </i>
+                </span>
+            
+        
+    
+  </div>
+
 </div>
 
+<!-- content -->
+<div id="article-content">
+	<p>可以构建领域仓库，实现领域复用：也可以用于优化中台战略，并且取缔大中台（中台拆分），因为<strong>一个中台组不可能同时满足所有其他项目组的需求</strong></p>
+<table>
+<thead>
+<tr>
+<th>DDD通用领域模型</th>
+<th>DDD清晰架构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E8%8F%B1%E5%BD%A2%E5%AF%B9%E7%A7%B0%E6%9E%B6%E6%9E%84.png" alt="DDD菱形对称架构"><br/><font size="1">通过消息契约层，不光保证逻辑边界清晰，同时也保证数据边界也很清晰</font></td>
+<td><img src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E6%B8%85%E6%99%B0%E6%9E%B6%E6%9E%84.png" alt="DDD清晰架构"></td>
+</tr>
+</tbody></table>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/02.DDD%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+                02.DDD四层架构设计
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>
