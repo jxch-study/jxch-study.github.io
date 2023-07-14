@@ -8,6 +8,8 @@
 	<!-- title -->
 	
 	<title>
+	
+		05-07.DDD设计 | 
 	 
 	架构师
 	</title>
@@ -168,7 +170,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-07.DDD%E8%AE%BE%E8%AE%A1/">
                      
 										    05-07.DDD设计
@@ -463,346 +465,163 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<div id="index">
+		<h1 id="article-title">
+	05-07.DDD设计
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
 	
-		<div class="index-li">
-			<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-07.DDD%E8%AE%BE%E8%AE%A1/">
-				<h2 class="index-title">
-					05-07.DDD设计
-				</h2>
-				<div class="index-brief">
-					目录
-01.DDD设计思想
-02.DDD四层架构设计
-03.DDD通用型领域
 
-01.DDD设计思想
-技术主动理解业务
-Controller、Service等概念并不具备实际的业务价值
-如果新的设计对已有的架构造成太大的冲突，就只能考虑重构。而重构对于业务专家来说，没有什么业务价值
-鼓励形成团队内部
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-14</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/知识图谱/">知识图谱</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/14/07.DDD%E8%AE%BE%E8%AE%A1/03-DDD%E9%80%9A%E7%94%A8%E5%9E%8B%E9%A2%86%E5%9F%9F/">
-				<h2 class="index-title">
-					03.DDD通用型领域
-				</h2>
-				<div class="index-brief">
-					可以构建领域仓库，实现领域复用：也可以用于优化中台战略，并且取缔大中台（中台拆分），因为一个中台组不可能同时满足所有其他项目组的需求
+	<span>姜希成</span>
+	<span>2023-07-14 10:31:13</span>
 
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+          
+              <span>
+                  <i class="fa fa-folder" aria-hidden="true">
+                  <a href="/categories/知识图谱/">知识图谱</a>
+                  </i>
+                
+              </span>
+          
+      
+    
 
+    
+		    <span>Tags：</span>
+        
+            
+                <span>
+                    <i class="fa fa-tag" aria-hidden="true">
+                    <a href="/tags/DDD/">DDD</a>
+                    </i>
+                </span>
+            
+        
+    
+  </div>
 
-DDD通用领域模型
-DDD清晰架构
-
-
-
-通过消息契约层，不光保证逻辑边界清晰，同时也保证数据边界也很清晰
-
-
-
-
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-14</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/DDD/">DDD</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/02.DDD%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
-				<h2 class="index-title">
-					02.DDD四层架构设计
-				</h2>
-				<div class="index-brief">
-					一个需求非常确定的项目，不管多复杂，都没有必要非转型成DDD，短平快的设计方式更为快捷。如果项目中有很多不确定性，以往的设计模式会遇到非常多的变数，这时DDD就是一个很好的选项了。开发业务时，可以优先开发领域层的业务逻辑，然后再写应用层的服务编排，而具体的外部依赖与具体实现可以最后再完成。整体就形成
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-13</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/DDD/">DDD</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/01.DDD%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">
-				<h2 class="index-title">
-					01.DDD设计思想
-				</h2>
-				<div class="index-brief">
-					很多软件设计上的不足，表面上看，似乎是技术架构的问题。因为如果架构师经验足够丰富，就能提前考虑到这些问题。如果开发团队技术足够过硬，就可以最快速度解决这些问题。但是，如果你将视野放开，放到到整个项目团队。你就会发现，一味的要求技术人员能够未卜先知，这是不现实也是不理智的。尤其对于长期建设的大型项目，
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-13</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/DDD/">DDD</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/13/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-06-%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/">
-				<h2 class="index-title">
-					05-06.电商系统
-				</h2>
-				<div class="index-brief">
-					目录
-单体VS微服务
-多数据源架构
-微服务架构拆分
-全链路灰度发布
-分布式唯一ID
-网关整合授权中心
-订单系统设计
-支付超时设计
-分布式事务
-高并发缓存
-数据高可用
-秒杀系统设计
-Sentinel限流
-高并发读写
-海量数据存储
-ES数据迁移
-架构师能力提升
-
-01.单体VS微服务
-单体服务
-优点：开
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-13</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/知识图谱/">知识图谱</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/12/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/17-%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8F%90%E5%8D%87/">
-				<h2 class="index-title">
-					17.架构师提升
-				</h2>
-				<div class="index-brief">
-					作为一个架构师仅仅掌握这些“硬”知识、“硬”技能还不够，“业务驱动技术”，但是业务领域更多是很多“软”性的、抽象的技能。一旦一个东西呈“软”性的，大家虽然知道这类东西存在，但又难于表述。
-业务架构业务意识互联网时代有个岗位——产品经理。而在互联网大规模发展起来之前，软件行业通常称为“需求分析师”。技
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-12</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/16-ES%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
-				<h2 class="index-title">
-					16.ES数据迁移
-				</h2>
-				<div class="index-brief">
-					不同方法的迁移步骤：
-
-elasticsearch-dump：适合数据量不大，迁移索引个数不多的场景
-snapshot：适用数据量大的场景，原理就是从源ES集群创建数据快照，然后在目标ES集群中进行恢复
-创建快照前必须先创建repository仓库，一个repository仓库可以包含多份快照文件
-
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/15-%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/">
-				<h2 class="index-title">
-					15.海量数据
-				</h2>
-				<div class="index-brief">
-					存储系统的技术选型技术选型时应该考虑哪些因素首先需要确定的是系统的类型，是一个在线业务系统，还是一个分析系统？在线业务系统对应的术语是OLTP ( On-line Transaction Processing，在线事务处理)，分析系统对应的术语是OLAP( Off-line Analytical P
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/03.%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/04.RockDB/01-RockDB/">
-				<h2 class="index-title">
-					01.RockDB
-				</h2>
-				<div class="index-brief">
-					RocksDB 是Facebook 开源的一个高性能、持久化的KV存储引擎，最初是Facebook 的数据库工程师团队基于Google LevelDB 开发。一般来说我们很少见到过哪个项目直接使用RocksDB 来保存数据，即使未来大概也不会像Redis 那样被业务系统直接使用。
-但是越来越多的新生
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/性能调优/">性能调优</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
-				<h2 class="index-title">
-					14.高并发读写
-				</h2>
-				<div class="index-brief">
-					
-侧重于“高并发读”的系统
-搜索引擎
-电商的商品搜索
-电商系统的商品描述、图片和价格
-
-
-侧重于“高并发写”的系统
-广告扣费系统
-
-
-同时有“高并发读”和“高并发写”的系统
-电商的库存系统和秒杀系统
-支付系统和微信红包
-IM、微博和朋友圈
-
-
-
-高并发读
-加缓存&#x2F;读副本
-本地缓存或集中式缓
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-	
-	<div id="index-paginator">
-		
-			<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&gt;</a>
-		
-	</div>
 </div>
 
+<!-- content -->
+<div id="article-content">
+	<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>01.DDD设计思想</li>
+<li>02.DDD四层架构设计</li>
+<li>03.DDD通用型领域</li>
+</ul>
+<h1 id="01-DDD设计思想"><a href="#01-DDD设计思想" class="headerlink" title="01.DDD设计思想"></a>01.DDD设计思想</h1><ul>
+<li><strong>技术主动理解业务</strong><ul>
+<li>Controller、Service等概念并不具备实际的业务价值</li>
+<li>如果新的设计对已有的架构造成太大的冲突，就只能考虑重构。而重构对于业务专家来说，没有什么业务价值</li>
+<li>鼓励形成团队内部的通用语言，业务如何组织，软件就如何构建</li>
+<li>让领域专家看到这样的组件，即便不了解实现细节，也能够知道这些组件是干什么的，从而有可能继续深入的参与软件建设过程</li>
+</ul>
+</li>
+<li><strong>“刚刚好”解决问题：</strong><ul>
+<li>往往项目未来的需求变化并不是技术人员能够把控的。如果未来的业务需求不是按照之前设计的路线演进，这些“提前设计“不但无法起到设计时的作用，反而会增加软件项目的复杂度</li>
+<li>同时为软件保持足够的灵活性，比如：如果抽象出了Repository仓库层，不管多复杂的持久化逻辑，都只是一个仓库实现而已，不会对业务造成任何影响。这些需求就可以比较独立的进行改造</li>
+</ul>
+</li>
+</ul>
+<h1 id="02-DDD四层架构设计"><a href="#02-DDD四层架构设计" class="headerlink" title="02.DDD四层架构设计"></a>02.DDD四层架构设计</h1><p>一个需求非常确定的项目，不管多复杂，都没有必要非转型成DDD，短平快的设计方式更为快捷。<strong>如果项目中有很多不确定性，以往的设计模式会遇到非常多的变数</strong>，这时DDD就是一个很好的选项了。开发业务时，可以优先开发领域层的业务逻辑，然后再写应用层的服务编排，而具体的外部依赖与具体实现可以最后再完成。整体就形成了一种以<strong>领域优先</strong>的架构形式。</p>
+<p><strong>DDD四层架构：</strong></p>
+<ol>
+<li><strong>用户接口层</strong>：对外提供服务</li>
+<li><strong>领域层</strong>：最底层不再是数据库，而是实体(Entity)，值对象(ValueObject)，领域服务(Domain Service)。这些对象都不依赖任何外部服务和框架。这些对象可以打包成一个领域层(Domain Layer)。<strong>领域层没有任何外部依赖关系</strong>。<ul>
+<li>使用值对象：具<strong>有业务意义的对象</strong>（比如做参数校验，避免类似逻辑分散出去，污染系统代码）</li>
+<li>使用<strong>充血模型</strong>改造实体类，保留改变状态的方法</li>
+<li>使用<strong>领域服务封装实体逻辑</strong>（跨领域对象的行为）</li>
+</ul>
+</li>
+<li><strong>应用层</strong>：原有的Service层，经过重新编排后，只依赖于一些抽象出来的防腐层(ACL)和仓库工厂(Repository)。他们的具体实现都是通过依赖注入进来的。他们一起负责整个组件的编排，这样就可以把他们打包成一个应用层(Application Layer)。<strong>应用层依赖领域层，但是不依赖具体实现</strong>。<ul>
+<li>抽象<strong>数据持久层</strong> - 建立仓库（让业务逻辑不再需要面向数据库编程，而是面向实体编程）</li>
+<li>ACL <strong>防腐层</strong> - 抽象第三方服务（防止第三方服务状态不可控，入参出参强耦合的问题）</li>
+</ul>
+</li>
+<li><strong>基础设施层</strong>：最后是一些与外部依赖打交道的组件。这些组件的实现通常依赖外部具体的技术实现和框架，可以统称为基础设施层(Infrastructure Layer)。</li>
+</ol>
+<p><strong>传统事务脚本式编码的问题：</strong></p>
+<ol>
+<li>代码层面的软件老化风险（代码不断膨胀）：数据来源被固定、业务逻辑无法复用、业务逻辑与数据存储相互依赖</li>
+<li>架构层面的软件老化风险（不敢升级，不敢写新功能）：数据结构变更、JDBC依赖调整、第三方服务变更、MQ中间件调整</li>
+<li>随之而来的实施及测试问题：设施搭建困难（依赖的外部组件太多）、测试用例覆盖困难</li>
+</ol>
+<p><strong>DDD领域划分设计：高内聚，低耦合：单一职责原则、依赖反转原则、开放封闭原则</strong></p>
+<ol>
+<li>构建<strong>领域地图</strong>（边界）<ul>
+<li>在DDD中推荐了<strong>事件风暴会议</strong>这样的具体形式，也强调了统一语言的理论模型。</li>
+<li>针对各个核心环节，优先构建单元测试案例，从而形成一些<strong>TDD测试驱动</strong>设计的实践场景。</li>
+<li>领域并不是天然存在的，这需要依赖于软件团队对软件需求的合理分析。并且分析的过程，<strong>即不能太过偏向于真实的业务领域，也不能太过偏向于极度抽象的技术领域，需要在整个项目团队内形成共识</strong>，然后通过初步抽象的通用语言将设计结果固化下来。</li>
+</ul>
+</li>
+<li>使用<strong>四层架构</strong>巩固领域基础（包结构） <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">application</span><br><span class="line">domain </span><br><span class="line">   xxx</span><br><span class="line">     adaptor</span><br><span class="line">          interface</span><br><span class="line">     entity </span><br><span class="line">     infrastructure</span><br><span class="line">     repository</span><br><span class="line">     service</span><br></pre></td></tr></table></figure></li>
+<li>划分<strong>限界上下文</strong>，巩固领域划分（DDD落地实践的关键）<ul>
+<li>传统MVC设计方式中，强调的是技术隔离，而并没有从业务上的限界上下文边界，所以，逻辑边界是混乱的。</li>
+<li>领域应该是足够<strong>内敛</strong>的，每个领域内的业务能力是与当前领域的知识语境紧密相连的。一个领域想要调用另外一个领域的业务能力，只能通过对方暴露出来的业务能力进行协作，而不能去干预对方领域的实现细节。所谓的单体架构、微服务架构、甚至包括MQ事件驱动架构，在DDD的视野中，都是领域之间的不同协作方式而已，对领域内部都是没有影响的。</li>
+</ul>
+</li>
+<li><strong>单体架构优先</strong>（SPI）<ul>
+<li>越是复杂的项目，就越应该重视单体架构的快速验证和快速试错，这对于提高复杂项目的运行效率是非常重要的，然后将单体架构中的关键领域拆分成微服务（比如SPI切换为Nacos，由于有防腐层，所以只需要切换抽象接口的实现类即可）</li>
+</ul>
+</li>
+</ol>
+<table>
+<tr>
+   <td><img title="DDD四层架构" src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84.png"/></td>
+   <td><img title="DDD限界" src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E9%99%90%E7%95%8C.png"/></td>
+</tr>
+<tr>
+   <td  colspan="2"><img title="DDD战术设计" src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E6%88%98%E6%9C%AF%E8%AE%BE%E8%AE%A1.png"/></td>   
+</tr>
+</table>
+
+<h1 id="03-DDD通用型领域"><a href="#03-DDD通用型领域" class="headerlink" title="03.DDD通用型领域"></a>03.DDD通用型领域</h1><p>可以构建领域仓库，实现领域复用：也可以用于优化中台战略，并且取缔大中台（中台拆分），因为<strong>一个中台组不可能同时满足所有其他项目组的需求</strong></p>
+<table>
+<tr>
+    <td><b>DDD通用领域模型</b></td>
+</td>
+<tr>
+    <td><img title="DDD菱形对称架构" src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E8%8F%B1%E5%BD%A2%E5%AF%B9%E7%A7%B0%E6%9E%B6%E6%9E%84.png"/><br/>通过消息契约层，不光保证逻辑边界清晰，同时也保证数据边界也很清晰</td>
+</tr>
+<tr>
+    <td><img title="DDD清晰架构" src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FDDD%2FDDD%E6%B8%85%E6%99%B0%E6%9E%B6%E6%9E%84.png"/></td>
+</tr>
+</table>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2023/07/14/07.DDD%E8%AE%BE%E8%AE%A1/03-DDD%E9%80%9A%E7%94%A8%E5%9E%8B%E9%A2%86%E5%9F%9F/">
+                03.DDD通用型领域
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
 	</div>
 	<div id="footer">
 	<p>
