@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		01.RockDB | 
+		02.IM系统高并发架构 | 
 	 
 	架构师
 	</title>
@@ -199,7 +199,7 @@
 									</a>
 									
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2023/07/11/03.%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/04.RockDB/01-RockDB/">
                      
 										    01.RockDB
@@ -478,7 +478,7 @@
 							</ul>
 			
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/02-IM%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/">
                      
 										    02.IM系统高并发架构
@@ -499,7 +499,7 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<h1 id="article-title">
-	01.RockDB
+	02.IM系统高并发架构
 </h1>
 
 <!-- meta -->
@@ -507,7 +507,7 @@
 	
 
 	<span>姜希成</span>
-	<span>2023-07-11 16:23:49</span>
+	<span>2023-07-14 14:31:21</span>
 
   <div id="article-categories">
     
@@ -516,7 +516,7 @@
           
               <span>
                   <i class="fa fa-folder" aria-hidden="true">
-                  <a href="/categories/性能调优/">性能调优</a>
+                  <a href="/categories/IM/">IM</a>
                   </i>
                 
               </span>
@@ -530,7 +530,7 @@
             
                 <span>
                     <i class="fa fa-tag" aria-hidden="true">
-                    <a href="/tags/RockDB/">RockDB</a>
+                    <a href="/tags/IM/">IM</a>
                     </i>
                 </span>
             
@@ -542,97 +542,52 @@
 
 <!-- content -->
 <div id="article-content">
-	<p>RocksDB 是Facebook 开源的一个高性能、持久化的KV存储引擎，最初是Facebook 的数据库工程师团队基于Google LevelDB 开发。一般来说我们很少见到过哪个项目直接使用RocksDB 来保存数据，即使未来大概也不会像Redis 那样被业务系统直接使用。</p>
-<p>但是越来越多的新生代数据库都选择RocksDB 作为它们的存储引擎。比如：</p>
-<ul>
-<li>CockroachDB（中文名蟑螂，一个开源、可伸缩、跨地域复制且兼容事务的ACID特性的分布式数据库，思路源自Google 的全球性分布式数据库 Spanner。其理念是将数据分布在多数据中心的多台服务器上）</li>
-<li>YugabyteDB，Tidb 作为CockroachDB 的竞争产品，底层也是RocksDB开源项目MyRocks 使用RocksDB 给MySQL 做存储引擎，目的是取代现有的InnoDB 存储引擎。</li>
-<li>MySQL 的亲兄弟 MariaDB 也已经接纳了MyRocks，作为它的存储引擎。</li>
-<li>实时计算引擎Flink，其State 就是一个KV 存储,它使用的也是RocksDB。</li>
-<li>此外包括MongoDB、Cassandra、Hbase 等在内的很多数据库,都在开发基于RocksDB 的存储引擎。</li>
-<li>这其中的主要原因就是RocksDB 高性能、支持事务。随机读最高可以达到19W&#x2F;S，平均水平13W&#x2F;S，覆盖操作可以达到9W&#x2F;S，多读单写的情况下在10W&#x2F;S 左右。批量写入5000 万数据，RocksDB 只花了1m26.9s，在几个对照引擎中（LevelDB与RocksDB 与HyperLevelDB 与LMDB），RocksDB 读取和删除方面表现最好，InfluxDB 也认为根据测试用例，RocksDB 作为存储引擎是个非常好的选择</li>
+	<p><img src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FIM%2FIM%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84.png" alt="IM系统高并发架构"></p>
+<h1 id="如何保证聊天系统消息的可靠投递-不丢消息"><a href="#如何保证聊天系统消息的可靠投递-不丢消息" class="headerlink" title="如何保证聊天系统消息的可靠投递(不丢消息)"></a>如何保证聊天系统消息的可靠投递(不丢消息)</h1><ol>
+<li>IM客户端发送消息如果超时或失败需要重发，客户端在发送消息时需要给<strong>每条消息生成一个id，IM服务端根据此id做好去重机制</strong></li>
+<li>为保证服务端消息不丢失，我们可以<strong>使用Rocket MQ的可靠消息机制</strong>来保证</li>
+<li>通过<strong>客户端的ACK确认接收消息的机制来保证不丢消息</strong></li>
+</ol>
+<h1 id="离线消息服务保证IM系统的高性能"><a href="#离线消息服务保证IM系统的高性能" class="headerlink" title="离线消息服务保证IM系统的高性能"></a>离线消息服务保证IM系统的高性能</h1><ol>
+<li>离线消息就是用户不在线时别人发给他的消息，到用户上线时这些消息需要接收到，因为用户上下线可能是非常频繁的操作，一般是在用户上线时会主动拉取服务端的离线消息，如果直接从数据库里拉，则会对数据库造成极大的压力，所以对于离线消息我们一般会选择一些高性能的<strong>缓存来存储</strong>，比如Redis，这样能抗住高并发的访问压力。</li>
+<li>当然Redis肯定是集群架构，而且会是很多节点，当然有同学也会担心这些离线消息肯定也是非常多的，Redis集群能存下吗，在大厂里Redis都是有很多节点的，可以存储很多T的数据，据说十年前新浪微博后端的Redis存储数据就已经达到几百T级别了，当然我们是可以设置一些存储策略的，比如，限制只存储最近一周或一个月的数据，然后再加一个存储消息的条数限制，比如<strong>一个用户的离线消息最多就存储最近的1000条</strong>。或者都按照存储条数的限制。</li>
+<li>因为本身用户上线后查看离线消息很少会把历史所有的离线消息全部看完的，我们<strong>就展示最近的一些离线消息</strong>，如果用户一直往上翻离线消息，后面的消息可以从数据库查询，这种小概率的操作让数据库抗下来是没问题的。</li>
+</ol>
+<h1 id="海量历史聊天消息数据存储方案详解"><a href="#海量历史聊天消息数据存储方案详解" class="headerlink" title="海量历史聊天消息数据存储方案详解"></a>海量历史聊天消息数据存储方案详解</h1><ol>
+<li>消息存储结构使用数据库表结构设计</li>
+<li>发送消息处理：用户1给用户2发送一条消息，需要在消息内容表里存储一条记录，同时需要在用户信箱消息索引表存储两条记录，<strong>一条是用户1的发件箱，一条是用户2的收件箱，为什么要存储两条记录，因为会存在消息的收发方各自删除记录的情况</strong>。</li>
+<li>查询聊天消息处理：查看用户1跟用户2的聊天记录，首先可以<strong>先分页查询聊天消息索引的id</strong>，<code>select mid,box_type from im_user_msg_box t where t.owner_uid = 1 and t.other_uid = 2 order by mid;</code>(注意要分页查)，然后再for循环在im_msg_content表查每条消息内容展示。因为聊天消息数据巨大，我们肯定要考虑数据库的<strong>分库分表</strong>方案，im_user_msg_box表我们可以按照 owner_uid 来分，这样我们正常的聊天记录查询是不需要跨表查询的，im_msg_content表我们可以按照 mid 来分，因为查询消息基本都是按照消息id主键来查，性能非常高。</li>
+<li>关于表设计的解释：这里解释下为什么将<strong>收发消息分为用户信箱消息索引表和消息内容表两张表来存储</strong>，因为很多时候消息内容会比较大<ul>
+<li>如果我们有时候<strong>只是需要读取一些消息收发的关系</strong>，而不关注消息内容的时候我们只需要查询用户信箱消息索引表即可，而不需要查询消息内容这种大数据表，对性能有一定提升。</li>
+<li><strong>收发消息方可能存在各自删除消息的情况</strong>，所以要存储两份消息索引，因为我们将消息索引和消息内容是分开存储的，所以也不会导致消息内容这种大数据被存储多份。</li>
 </ul>
-<h1 id="RocksDB-VS-Redis"><a href="#RocksDB-VS-Redis" class="headerlink" title="RocksDB VS Redis"></a>RocksDB VS Redis</h1><p>说到KV存储,我们最熟悉的就是Redis了。RocksDB 和 Redis 都是KV 存储。其实Redis 和 RocksDB 之间并没有可比性，一个是缓存，一个是数据库存储引擎。Redis 是一个内存数据库，它的性能非常好，主要原因之一是它的数据全都保存在内存中。按照 Redis 官方网站提供的测试数据来看，它的随机读写性能大约为50 万次&#x2F;秒，当然我们普遍的认可的说法是10W&#x2F;S。从我们上面的文字可以看到RocksDB 相应的随机读写性能大约为20 万次&#x2F;秒，<strong>虽然其性能还不如 Redis，但是已经可以算是在同一个量级水平了，毕竟一个是内存操作，另一个是磁盘IO操作。</strong></p>
-<p>但是我们也知道，Redis 只是一个内存数据库，并不是一个可靠的存储引擎。在Redis 中，数据写到内存中就算成功了，其并不能保证将数据安全地保存到磁盘上。而 RocksDB 则是一个持久化的KV 存储引擎，它需要保证每条数据都已安全地写到磁盘上。这种情况下，RocksDB 的优势就很明显，磁盘的读写性能与内存的读写性能本就相差了一两个数量级，读写磁盘的RocksDB 能达到与读写内存的Redis 相近的性能这就是RocksDB 的价值所在了。一个存储系统的读写性能主要取决于它的存储结构，也就是数据是如何组织的。RocksDB 采用了一个非常复杂的数据存储结构，并且这个存储结构采用了内存和磁盘混合存储的方式，它使用磁盘来保证数据的可靠存储的,并且会利用速度更快的内存来提升读写性能。</p>
-<p>RocksDB 为什么能实现这么高的写入性能呢？大多数存储系统为了能够实现快速查找都会采用树或哈希表之类的存储结构。数据在写入的时候必须写到特定的位置上。比如,我们在向B+树中写入一条数据时，必须按照B+树的排序方式,写到某个固定的节点下面。哈希表也与之类似，必须要写到特定的哈希槽中。这样的数据结构会导致在写入数据的时候,不得不先在磁盘的这里写一部分，再到那里写一部分这样跳来跳去地写，即我们所说的“随机写”。MySQL 为了减少随机读写，下了不少功夫。<strong>而RocksDB 的数据结构，可以保证写入磁盘的绝大多数操作都是顺序写入的。</strong></p>
-<p>Kafka 所采用的也是顺序读写的方式，所以读写性能也非常好。凡事有利也有弊，这种数据基本上是没法查询的因为数据没有结构,只能采用遍历的方式。RocksDB 究竟如何在保证数据顺序写入的前提下，还能兼顾很好的查询性能呢?？其实使用了数据结构LSM-Tree。</p>
-<h1 id="LSM-Tree-如何兼顾读写性能"><a href="#LSM-Tree-如何兼顾读写性能" class="headerlink" title="LSM-Tree 如何兼顾读写性能"></a>LSM-Tree 如何兼顾读写性能</h1><p>LSM-Tree 的全称是The Log-Structured Merge-Tree，是一种非常复杂的复合数据结构。它包含了WAL (Write Ahead Log)、跳表(SkipList)和一个分层的有序表(Sorted String Table, SSTable)，LSM-tree 专门为key-value 存储系统设计的，以牺牲部分读取性能为代价提高写入性能，通常适合于写多读少的场景。</p>
-<p>数据的写入过程。当LSM-Tree 收到一个写请求时，比如“PUT foo bar”，即把Key foo 的值设置为bar，这条操作命令会被<strong>写入磁盘的 WAL 日志中</strong>，图中右侧的Log，<strong>这是一个顺序写磁盘的操作</strong>，性能很好。这个日志的<strong>唯一作用就是从故障中恢复系统数据</strong>，一旦系统宕机，就可以根据日志把内存中还没有来得及写入磁盘的数据恢复出来。写完日志之后，数据可靠性的问题就解决了<strong>。然后数据会被写入内存的MemTable 中</strong>，这个 <strong>MemTable 就是一个按照Key 组织的跳表</strong>(SkipList)，跳表的查找性能与平衡树类似，但实现起来更简单一些。写MemTable 是一项内存操作，速度也非常快。</p>
-<p>数据<strong>写入MemTable 之后就可以返回写入成功</strong>的信息了。不过LSM-Tree 在处理写入数据的过程中会<strong>直接将Key 写入 MemTable，而不会预先查看MemTable中是否已经存在该Key</strong>。很明显MemTable 不能无限制地写入内存，一是内存的容量毕竟有限，另外，<strong>MemTable 太大会导致读写性能下降</strong>。所以MemTable 有一个固定的上限大小,一般是<strong>32MB</strong>。<strong>MemTable 写满之后，就会转换成Immutable(不可变的)MemTable，然后再创建一个空的MemTable 继续写</strong>。这个Immutable MemTable 是只读的MemTable，它与MemTable 的数据结构完全一样唯一的区别就是不允许再写入了。<strong>Immutable MemTable 也不能在内存中无限地占地方，而是会有一个后台线程，不停地把Immutable MemTable 复制到磁盘文件中，然后释放内存空间。每个Immutable MemTable 对应于一个磁盘文件</strong>，MemTable 的数据结构跳表本身就是一个有序表，写入文件的数据结构也是按照Key 来排序的，<strong>这些文件就是SSTable</strong>。由于把MemTable 写入 SSTable 的这个写操作,是把整块内存写入整个文件中，因此该操作同样也是一个顺序写操作。虽然数据已经保存到磁盘上了，而且<strong>这些SSTable 文件中的Key 是有序的,但是文件之间却是完全无序的，所以还是无法查找。SSTable 采用了一个分层合并机制来解决这个问题。SSTable 被分为很多层，每一层的容量都有一个固定的上限。</strong></p>
-<p>一般来说，<strong>下一层的容量是上一层的10 倍</strong>。<strong>当某一层写满时，就会触发后台线程往下一层合并，数据合并到下一层之后，本层的SSTable 文件就可以删除了。合并的过程也是排序的过程，除了Level 0 以外，每层中的文件都是有序的</strong>,文件内的KV 也是有序的，这样就比较便于查找了。<strong>LSM-Tree 查找的过程也是分层查找，先在内存中的 MemTable 和Immutable MemTable 中查找，然后再按照顺序依次在磁盘的每层SSTable 文件中查找，一旦找到了就直接返回。</strong>看起来这样的查找方式很低效的，可能需要多次查找内存和多个文件才能找到一个Key，但实际上这样一个分层的结构，它会天然形成一个非常有利于查找的状况，即<strong>越是经常被读写到的热数据，它在这个分层结构中就越靠上，对这样的Key 查找就越快。</strong>比如最经常读写的Key 很大概率会在内存中，这样不用读写磁盘就能完成查找。即使在内存中查不到真正需要穿透很多层SSTable，一直查到最底层的请求,实际也还是很少的。另外在工程实现上，还会做很多优化。</p>
-<p>比如RocksDB 里，<strong>为存储的数据逻辑分族，独特的filter 对读优化，使用多个memtable 并在immutbale memtable 提前进行数据合并的优化</strong>，<strong>在内存中缓存SSTable文件的Key用布隆过滤器避免无谓的查找等，以加速查找过程</strong>；不同的合并算法，SSTFile-Indexing 机制，针对sstfile 有自己的block cache 和table cache。这样综合优化下来最终的性能，尤其是查找会相对较好。</p>
-<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><ol>
-<li>操作命令写入磁盘的 WAL 日志中（顺序写）：唯一作用就是从故障中恢复系统数据</li>
-<li>写入内存的MemTable中（按照Key组织的跳表，MemTable 太大会导致读写性能下降，一般是32MB）<ol>
-<li>直接将Key 写入 MemTable，而不会预先查看MemTable中是否已经存在该Key</li>
-<li>写入MemTable之后就可以返回写入成功</li>
-</ol>
-</li>
-<li>MemTable写满之后，就会转换成Immutable(不可变的)MemTable，然后再创建一个空的MemTable继续写<ol>
-<li>Immutable MemTable也不能在内存中无限地占地方，而是会有一个后台线程，不停地把Immutable MemTable复制到磁盘文件中，然后释放内存空间。</li>
-<li>每个Immutable MemTable 对应于一个磁盘文件，这些文件就是SSTable（这些SSTable文件中的Key是有序的,但是文件之间却是完全无序的，所以还是无法查找）</li>
-</ol>
-</li>
-<li>SSTable 采用分层合并机制，SSTable被分为很多层，每一层的容量都有一个固定的上限。下一层的容量是上一层的10倍。<ol>
-<li>当某一层写满时，就会触发后台线程往下一层合并</li>
-<li>数据合并到下一层之后，本层的SSTable文件就可以删除了</li>
-<li>合并的过程也是排序的过程，除了Level 0以外，每层中的文件都是有序的</li>
-</ol>
-</li>
-<li>LSM-Tree 查找的过程也是分层查找<ol>
-<li>先在内存中的 MemTable 和Immutable MemTable 中查找，然后再按照顺序依次在磁盘的每层SSTable 文件中查找，一旦找到了就直接返回</li>
-<li>越是经常被读写到的热数据，它在这个分层结构中就越靠上，对这样的Key 查找就越快</li>
-<li>在内存中缓存SSTable文件的Key用布隆过滤器避免无谓的查找等，以加速查找过程</li>
-<li>使用多个memtable并在immutbale memtable提前进行数据合并的优</li>
-<li>为存储的数据逻辑分族，独特的filter 对读优化</li>
-</ol>
 </li>
 </ol>
-<h1 id="总结梳理"><a href="#总结梳理" class="headerlink" title="总结梳理"></a>总结梳理</h1><p>虽然其性能还不如 Redis，但是已经可以算是在同一个量级水平了，毕竟一个是内存操作，另一个是磁盘IO操作。RocksDB 的数据结构，可以保证写入磁盘的绝大多数操作都是顺序写入的。</p>
-<h2 id="LSM-Tree-如何兼顾读写性能-1"><a href="#LSM-Tree-如何兼顾读写性能-1" class="headerlink" title="LSM-Tree 如何兼顾读写性能"></a>LSM-Tree 如何兼顾读写性能</h2><ol>
-<li><p>操作命令写入磁盘的 WAL 日志中（顺序写）：唯一作用就是从故障中恢复系统数据</p>
-</li>
-<li><p>写入内存的MemTable中（按照Key组织的跳表，MemTable 太大会导致读写性能下降，一般是32MB）</p>
-<ol>
-<li><p>直接将Key 写入 MemTable，而不会预先查看MemTable中是否已经存在该Key</p>
-</li>
-<li><p>写入MemTable之后就可以返回写入成功</p>
-</li>
+<h1 id="合理选择Redis数据结构存储离线消息"><a href="#合理选择Redis数据结构存储离线消息" class="headerlink" title="合理选择Redis数据结构存储离线消息"></a>合理选择Redis数据结构存储离线消息</h1><ol>
+<li>添加消息：<code>zadd offline_msg_#&#123;receiverId&#125;  #&#123;mid&#125;  #&#123;msg&#125;</code> (score就存储消息的id)</li>
+<li>查询消息：<code>zrevrange offline_msg_#&#123;receiverId&#125; 0 9</code> (按消息id从大到小排序取最新的十条消息，上拉刷新继续查)</li>
+<li>删除消息：<code>zremrangebyscore offline_msg_#&#123;receiverId&#125;  min_mid  max_mid</code> (删除客户端已读取过的介于最小的消息id和最大的消息id之间的所有消息)</li>
+<li>如果单个key消息存储过大，可以考虑<strong>按周或者按月针对同一个receiverId多搞几个key分段来存储</strong></li>
 </ol>
-</li>
-<li><p>MemTable写满之后，就会转换成Immutable(不可变的)MemTable，然后再创建一个空的MemTable继续写</p>
-<ol>
-<li><p>Immutable MemTable也不能在内存中无限地占地方，而是会有一个后台线程，不停地把Immutable MemTable复制到磁盘文件中，然后释放内存空间。</p>
-</li>
-<li><p>每个Immutable MemTable 对应于一个磁盘文件，这些文件就是SSTable（这些SSTable文件中的Key是有序的,但是文件之间却是完全无序的，所以还是无法查找）</p>
-</li>
+<h1 id="群聊数据收发机制读扩散与写扩散详解"><a href="#群聊数据收发机制读扩散与写扩散详解" class="headerlink" title="群聊数据收发机制读扩散与写扩散详解"></a>群聊数据收发机制读扩散与写扩散详解</h1><ol>
+<li>群聊我们目前的设计是基于<strong>读扩散</strong>，就是说用户在群里发<strong>一条消息只存一份数据，群里所有人都读同一份消息数据</strong>，这种方式比较简单，但是会有些问题，比如钉钉或企业微信的群聊消息已读用户列表功能就不太好实现了。</li>
+<li><strong>写扩散</strong>机制：就是说用户在群里发<strong>一条消息会针对群里每个用户都存一条消息索引，然后再单独存储一份消息内容</strong>，这样可以针对用户是否已读做一些处理，但是写扩散有一个问题就是群的人数不能太多，否则性能会有问题，而且会有大量存储浪费，比如万人群聊，要是用写扩散，每个用户发一条消息，要存储上万条索引，这个对性能以及存储耗费太大。</li>
 </ol>
-</li>
-<li><p>SSTable 采用分层合并机制，SSTable被分为很多层，每一层的容量都有一个固定的上限。下一层的容量是上一层的10倍。</p>
-<ol>
-<li><p>当某一层写满时，就会触发后台线程往下一层合并</p>
-</li>
-<li><p>数据合并到下一层之后，本层的SSTable文件就可以删除了</p>
-</li>
-<li><p>合并的过程也是排序的过程，除了Level 0以外，每层中的文件都是有序的</p>
-</li>
+<h2 id="微博读写扩散架构"><a href="#微博读写扩散架构" class="headerlink" title="微博读写扩散架构"></a>微博读写扩散架构</h2><p><img src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FIM%2F%E5%BE%AE%E5%8D%9A%E8%AF%BB%E5%86%99%E6%89%A9%E6%95%A3%E6%9E%B6%E6%9E%84.jpg" alt="微博读写扩散架构"></p>
+<h1 id="基于Lua脚本保证消息未读数的一致性"><a href="#基于Lua脚本保证消息未读数的一致性" class="headerlink" title="基于Lua脚本保证消息未读数的一致性"></a>基于Lua脚本保证消息未读数的一致性</h1><ol>
+<li>我们用的很多通讯软件都会有<strong>消息未读数的功能</strong>，就是软件右上角的红色数字，包括还有跟某人的消息会话的未读数，这个未读数功能是可以用redis来维护的，比如，张三给王五发一条消息，需要维护两个redis key，一个是王五总的未读数key加1，一个是张三_王五的未读数key加1。这两个key的加1操作，我们是需要尽量保证它的原子性的，可以用lua脚本来实现。</li>
+<li>当然有同学可能会说总未读数可以不用单独维护，对所有消息会话的未读数求和就行了，注意，如果用户的消息会话比较多的话，那可能就会有性能瓶颈了，包括用户每个消息会话的未读数时刻在变化，在<strong>求和的过程中，可能之前读取的消息会话未读数又发生变化了，所以我们一般会单独维护总未读数</strong>。<br>3. 当客户端读了消息了，就给服务端发消息，服务端收到后更新未读数。未读数一般来说是在客户端自己去维护的，<strong>服务端的未读数更多是为了给客户端多端数据同步用的。</strong><br>4. 对于群聊的未读数，一般可以<strong>针对群里每个人维护一个未读数key，比如用hash结构来存储</strong>，一个群里的所有用户的未读数可以用一个：<code>hincrby msg:noreadcount:gid uid 1</code>   (gid为群id，uid为用户id)</li>
 </ol>
-</li>
-<li><p>LSM-Tree 查找的过程也是分层查找</p>
-<ol>
-<li><p>先在内存中的 MemTable 和Immutable MemTable 中查找，然后再按照顺序依次在磁盘的每层SSTable 文件中查找，一旦找到了就直接返回</p>
-</li>
-<li><p>越是经常被读写到的热数据，它在这个分层结构中就越靠上，对这样的Key 查找就越快</p>
-</li>
-<li><p>在内存中缓存SSTable文件的Key用布隆过滤器避免无谓的查找等，以加速查找过程</p>
-</li>
-<li><p>使用多个memtable并在immutbale memtable提前进行数据合并的优</p>
-</li>
-<li><p>为存储的数据逻辑分族，独特的filter 对读优化</p>
-</li>
+<h1 id="万人群聊系统设计难点剖析"><a href="#万人群聊系统设计难点剖析" class="headerlink" title="万人群聊系统设计难点剖析"></a>万人群聊系统设计难点剖析</h1><ol>
+<li>未读数更新高并发问题，对于万人群聊来说，1个用户发1条消息，可能会触发群里所有用户的未读数更新，相当于更新两万次redis里的未读数，如果这个群比较活跃，每秒假设有100人发消息，每人发1条，那意味着光这一个群每秒钟会对redis操作两百万次，这会对redis造成巨大的压力，<strong>因为未读数其实主要是在客户端自己维护的，服务端维护主要是为了多端同步，所以我们可以不实时更新服务端的未读数，而改为定时批量更新</strong>，比如每5秒甚至更长时间更新一次redis里的未读数，这5秒内的未读数更新可以在未读数服务的内存里更新，<strong>到了5秒了，再统一往redis里刷一次，在其他端要同步的时候可以触发一次内存未读数刷新redis的操作之后再同步。</strong>当然中间可能会出现未读数服务宕机导致丢失部分未读数，一般来说业务是能够允许的。</li>
+<li>万人群聊还有一个高并发难题，按我们现有架构，1个用户发1条消息，要给群里1万个用户转发消息，意味着每秒要查询1万次redis里的netty服务路由信息，如果这个群比较活跃，每秒有100人发消息，每人每秒发1条，意味着1秒钟要查询100万次redis，这还只是1个群了，如果有成千上万的群，那对redis也会造成巨大的压力，这个问题与后面要讲的百万人在线直播间发消息很类似，都有高并发问题，我们放在后面一起来讲。</li>
 </ol>
-</li>
+<h1 id="百万在线直播互动场景设计难点剖析"><a href="#百万在线直播互动场景设计难点剖析" class="headerlink" title="百万在线直播互动场景设计难点剖析"></a>百万在线直播互动场景设计难点剖析</h1><ol>
+<li>上面提到的万人群聊第二个问题，放在这种百万人在线的直播间，问题会更严重，试想下，假设这个直播间每秒有100人发消息，每人每秒发1条，意味着每秒要查询1亿次redis，redis集群就算机器再多也是扛不住这种压力的，那我们之前的方案在这种万人群聊以及百万在线直播间的场景下肯定需要做优化了。</li>
+<li><strong>这种情况我们其实可以不经过redis，直接把消息投递给所有的netty服务器，假设有20台netty服务器，对于百万人的直播间，每台netty服务器应该有5万左右的直播间用户连接，我们可以让每台netty服务直接将消息推送给自己服务器上对应连接的直播间用户</strong>。当然这种用户连接是比较理想的情况，有的时候可能会出现某些netty服务器几乎没有直播间的用户连接，那么这些netty服务器收到消息后直接丢弃就行，不会浪费什么系统资源。当然这种情况其实<strong>可以让所有的netty服务器监听mq的消息。</strong></li>
+<li><strong>在netty服务器上可以维护好直播间或万人群聊里连接到本台服务器的用户列表缓存，这样只要收到直播间或群聊消息，直接根据直播间号或者群聊id找到对应用户连接channel推送消息。</strong></li>
 </ol>
+<h1 id="熔断限流机制保证消息收发核心链路高可用"><a href="#熔断限流机制保证消息收发核心链路高可用" class="headerlink" title="熔断限流机制保证消息收发核心链路高可用"></a>熔断限流机制保证消息收发核心链路高可用</h1><p>对于大型的直播间或万人群聊，因为一些热点事件，或者大V出镜直播，会导致消息量暴增，以至于超过服务器能处理的压力范围，这种时候我们是需要做一些<strong>限流措施的，可以丢掉部分消息，以确保整个系统的稳定</strong>，这种处理一般来说业务也是允许的，而且如果每秒大量的消息推到客户端，客户端不一定能及时处理下来，<strong>一般客户端在直播间，每秒接收几十条消息已经快到极限了。</strong></p>
 
 </div>
 
@@ -641,16 +596,11 @@
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/15-%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  15.海量数据
-              </a>
-            
         </div>
         <div class="item right">
             
-              <a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
-                14.高并发读写
+              <a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/01-IM%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD/">
+                01.IM系统基础功能
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
             
