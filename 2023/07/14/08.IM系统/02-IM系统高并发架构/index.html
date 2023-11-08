@@ -180,6 +180,39 @@
 								<div class="article-toc" style="display: none;"></div>
 							</ul>
 			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-08-IM%E7%B3%BB%E7%BB%9F/">
+                     
+										    05-08.IM系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02.并发编程
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/16/02.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/01-JMM/">
+                     
+										    01.JMM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
 								</li>
 								
 							</ul>
@@ -492,6 +525,72 @@
 								
 							</ul>
 			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java编程参考
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83-About/">
+                     
+										    Java编程参考-About
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										日志
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/%E6%97%A5%E5%BF%97/slf4j/">
+                     
+										    slf4j
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										流库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/%E6%B5%81%E5%BA%93/Optional/">
+                     
+										    Optional
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
 		</div>
 	</div>
 </div>
@@ -576,7 +675,9 @@
 <h2 id="微博读写扩散架构"><a href="#微博读写扩散架构" class="headerlink" title="微博读写扩散架构"></a>微博读写扩散架构</h2><p><img src="https://objectstorage.us-phoenix-1.oraclecloud.com/n/axdikqaqm3dc/b/bucket1/o/IT%2FIM%2F%E5%BE%AE%E5%8D%9A%E8%AF%BB%E5%86%99%E6%89%A9%E6%95%A3%E6%9E%B6%E6%9E%84.jpg" alt="微博读写扩散架构"></p>
 <h1 id="基于Lua脚本保证消息未读数的一致性"><a href="#基于Lua脚本保证消息未读数的一致性" class="headerlink" title="基于Lua脚本保证消息未读数的一致性"></a>基于Lua脚本保证消息未读数的一致性</h1><ol>
 <li>我们用的很多通讯软件都会有<strong>消息未读数的功能</strong>，就是软件右上角的红色数字，包括还有跟某人的消息会话的未读数，这个未读数功能是可以用redis来维护的，比如，张三给王五发一条消息，需要维护两个redis key，一个是王五总的未读数key加1，一个是张三_王五的未读数key加1。这两个key的加1操作，我们是需要尽量保证它的原子性的，可以用lua脚本来实现。</li>
-<li>当然有同学可能会说总未读数可以不用单独维护，对所有消息会话的未读数求和就行了，注意，如果用户的消息会话比较多的话，那可能就会有性能瓶颈了，包括用户每个消息会话的未读数时刻在变化，在<strong>求和的过程中，可能之前读取的消息会话未读数又发生变化了，所以我们一般会单独维护总未读数</strong>。<br>3. 当客户端读了消息了，就给服务端发消息，服务端收到后更新未读数。未读数一般来说是在客户端自己去维护的，<strong>服务端的未读数更多是为了给客户端多端数据同步用的。</strong><br>4. 对于群聊的未读数，一般可以<strong>针对群里每个人维护一个未读数key，比如用hash结构来存储</strong>，一个群里的所有用户的未读数可以用一个：<code>hincrby msg:noreadcount:gid uid 1</code>   (gid为群id，uid为用户id)</li>
+<li>当然有同学可能会说总未读数可以不用单独维护，对所有消息会话的未读数求和就行了，注意，如果用户的消息会话比较多的话，那可能就会有性能瓶颈了，包括用户每个消息会话的未读数时刻在变化，在<strong>求和的过程中，可能之前读取的消息会话未读数又发生变化了，所以我们一般会单独维护总未读数</strong>。</li>
+<li>当客户端读了消息了，就给服务端发消息，服务端收到后更新未读数。未读数一般来说是在客户端自己去维护的，<strong>服务端的未读数更多是为了给客户端多端数据同步用的。</strong></li>
+<li>对于群聊的未读数，一般可以<strong>针对群里每个人维护一个未读数key，比如用hash结构来存储</strong>，一个群里的所有用户的未读数可以用一个：<code>hincrby msg:noreadcount:gid uid 1</code>   (gid为群id，uid为用户id)</li>
 </ol>
 <h1 id="万人群聊系统设计难点剖析"><a href="#万人群聊系统设计难点剖析" class="headerlink" title="万人群聊系统设计难点剖析"></a>万人群聊系统设计难点剖析</h1><ol>
 <li>未读数更新高并发问题，对于万人群聊来说，1个用户发1条消息，可能会触发群里所有用户的未读数更新，相当于更新两万次redis里的未读数，如果这个群比较活跃，每秒假设有100人发消息，每人发1条，那意味着光这一个群每秒钟会对redis操作两百万次，这会对redis造成巨大的压力，<strong>因为未读数其实主要是在客户端自己维护的，服务端维护主要是为了多端同步，所以我们可以不实时更新服务端的未读数，而改为定时批量更新</strong>，比如每5秒甚至更长时间更新一次redis里的未读数，这5秒内的未读数更新可以在未读数服务的内存里更新，<strong>到了5秒了，再统一往redis里刷一次，在其他端要同步的时候可以触发一次内存未读数刷新redis的操作之后再同步。</strong>当然中间可能会出现未读数服务宕机导致丢失部分未读数，一般来说业务是能够允许的。</li>
@@ -595,6 +696,11 @@
 
     <div class="post-guide">
         <div class="item left">
+            
+              <a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-08-IM%E7%B3%BB%E7%BB%9F/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  05-08.IM系统
+              </a>
             
         </div>
         <div class="item right">
