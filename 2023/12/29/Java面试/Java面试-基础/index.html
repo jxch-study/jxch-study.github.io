@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Java面试-基础 | 
+	 
+	架构师
+	</title>
+	
+	<!-- keywords,description -->
+	 
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+
+
+	<!-- search -->
+	<script>
+		var searchEngine = "https://www.google.com/search?q=";
+		if(typeof searchEngine == "undefined" || searchEngine == null || searchEngine == ""){
+			searchEngine = "https://www.google.com/search?q=";
+		}
+		var homeHost = "";
+		if(typeof homeHost == "undefined" || homeHost == null || homeHost == ""){
+			homeHost = window.location.host;
+		}
+	</script>
+
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@v1.5.1/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">架构师</a>
+
+	<ul id="menu">
+    
+      <li class="menu-item">
+        <a href="/about" class="menu-item-link">ABOUT</a>
+      </li>
+    
+
+    
+      <li class="menu-item">
+        <a href="/tags" class="menu-item-link">标签</a>
+      </li>
+    
+
+    
+      <li class="menu-item">
+        <a href="/categories" class="menu-item-link">分类</a>
+      </li>
+    
+
+    
+      
+      
+        <li class="menu-item">
+          <a href='https://jxch-capital.github.io/' class="menu-item-link" target="_blank">
+            jxch-capital-blog
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a href='https://jiangxicheng.site/capital/' class="menu-item-link" target="_blank">
+            jxch-capital-web
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a href='https://jxch.github.io/' class="menu-item-link" target="_blank">
+            jxch-blog
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a href='https://blog.csdn.net/jxch____' class="menu-item-link" target="_blank">
+            CSDN-blog
+          </a>
+        </li>
+      
+    
+  
+    
+      <li class="menu-item">
+        <a href='https://github.com/jxch' class="menu-item-link" target="_blank">
+          <i class="fa fa-github fa-2x"></i>
+        </a>
+      </li>
+    
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="search" placeholder="按回车全站搜索">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										00.知识图谱
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/13/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-06-%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/">
+                     
+										    05-06.电商系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-07.DDD%E8%AE%BE%E8%AE%A1/">
+                     
+										    05-07.DDD设计
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-08-IM%E7%B3%BB%E7%BB%9F/">
+                     
+										    05-08.IM系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										02.并发编程
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/16/02.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/01-JMM/">
+                     
+										    01.JMM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										03.性能调优
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										04.RockDB
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/11/03.%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/04.RockDB/01-RockDB/">
+                     
+										    01.RockDB
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										06.电商系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/01-%E5%8D%95%E4%BD%93VS%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+                     
+										    01.单体VS微服务
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/02-%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E6%9E%B6%E6%9E%84/">
+                     
+										    02.多数据源架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/03-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E6%8B%86%E5%88%86/">
+                     
+										    03.微服务架构拆分
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/08/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/04-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A8%E9%93%BE%E8%B7%AF%E7%81%B0%E5%BA%A6%E5%8F%91%E5%B8%83/">
+                     
+										    04.微服务全链路灰度发布
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/05-%E5%88%86%E5%B8%83%E5%BC%8F%E5%94%AF%E4%B8%80ID/">
+                     
+										    05.分布式唯一ID
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/06-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3%E6%95%B4%E5%90%88OAuth2-0%E6%8E%88%E6%9D%83%E4%B8%AD%E5%BF%83/">
+                     
+										    06.微服务网关整合OAuth2.0授权中心
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/09/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/07-%E8%AE%A2%E5%8D%95%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+                     
+										    07.订单系统设计
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/08-%E6%94%AF%E4%BB%98%E8%B6%85%E6%97%B6/">
+                     
+										    08.支付超时
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/09-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+                     
+										    09.分布式事务
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/10-%E9%AB%98%E5%B9%B6%E5%8F%91%E7%BC%93%E5%AD%98/">
+                     
+										    10.高并发缓存
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/11-%E6%95%B0%E6%8D%AE%E9%AB%98%E5%8F%AF%E7%94%A8/">
+                     
+										    11.数据高可用
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/10/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/12-%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/">
+                     
+										    12.秒杀系统
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/13-Sentinel%E9%99%90%E6%B5%81/">
+                     
+										    13.Sentinel限流
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
+                     
+										    14.高并发读写
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/15-%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/">
+                     
+										    15.海量数据
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/16-ES%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
+                     
+										    16.ES数据迁移
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/12/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/17-%E6%9E%B6%E6%9E%84%E5%B8%88%E6%8F%90%E5%8D%87/">
+                     
+										    17.架构师提升
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										07.DDD设计
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/01.DDD%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/">
+                     
+										    01.DDD设计思想
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/13/07.DDD%E8%AE%BE%E8%AE%A1/02.DDD%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">
+                     
+										    02.DDD四层架构设计
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/07.DDD%E8%AE%BE%E8%AE%A1/03-DDD%E9%80%9A%E7%94%A8%E5%9E%8B%E9%A2%86%E5%9F%9F/">
+                     
+										    03.DDD通用型领域
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										08.IM系统
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/01-IM%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD/">
+                     
+										    01.IM系统基础功能
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/02-IM%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/">
+                     
+										    02.IM系统高并发架构
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java区块链
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E5%8C%BA%E5%9D%97%E9%93%BE/Java%E5%8C%BA%E5%9D%97%E9%93%BE/">
+                     
+										    Java区块链
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java编程参考
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83-About/">
+                     
+										    Java编程参考-About
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										日志
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/%E6%97%A5%E5%BF%97/slf4j/">
+                     
+										    slf4j
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										流库
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/11/09/Java%E7%BC%96%E7%A8%8B%E5%8F%82%E8%80%83/%E6%B5%81%E5%BA%93/Optional/">
+                     
+										    Optional
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										Java面试
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-JVM/">
+                     
+										    Java面试-JVM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/12/30/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-RabbitMQ/">
+                     
+										    Java面试-RabbitMQ
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file active">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-%E5%9F%BA%E7%A1%80/">
+                     
+										    Java面试-基础
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-%E5%AD%97%E7%AC%A6%E4%B8%B2/">
+                     
+										    Java面试-字符串
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-%E9%9B%86%E5%90%88/">
+                     
+										    Java面试-集合
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+	Java面试-基础
+</h1>
+
+<!-- meta -->
+<div class="article-meta">
+	
+
+	<span>姜希成</span>
+	<span>2023-12-29 18:39:48</span>
+
+  <div id="article-categories">
+    
+		  <span>Categories：</span>
+      
+          
+              <span>
+                  <i class="fa fa-folder" aria-hidden="true">
+                  <a href="/categories/JAVA/">JAVA</a>
+                  </i>
+                
+              </span>
+          
+      
+    
+
+    
+		    <span>Tags：</span>
+        
+            
+                <span>
+                    <i class="fa fa-tag" aria-hidden="true">
+                    <a href="/tags/Java面试/">Java面试</a>
+                    </i>
+                </span>
+            
+        
+    
+  </div>
+
+</div>
+
+<!-- content -->
+<div id="article-content">
+	<p>Java面试-基础：</p>
+<ul>
+<li>Map</li>
+<li>JVM</li>
+<li>GC</li>
+<li>类加载</li>
+<li>线程池</li>
+<li>高并发</li>
+<li>缓存</li>
+<li>HTTPS</li>
+<li>幂等</li>
+<li>限流</li>
+<li>一致性Hash算法</li>
+<li>事务</li>
+<li>动态代理</li>
+<li>SpringBoot启动机制</li>
+<li>SpringIOC容器启动流程</li>
+<li>简历</li>
+</ul>
+<hr>
+<ul>
+<li><code>HashMap</code>: 数组，链表，红黑树（链表长度大于8之后）<ul>
+<li><code>hash</code> 算法(确保足够随机)：<code>hash ^ (hash &gt;&gt;&gt; 16)</code></li>
+<li>数组下标： <code>hash &amp; (n-1)</code> 等价于 <code>hash % n</code></li>
+<li>扩容因子：0.75，变长2倍</li>
+</ul>
+</li>
+<li><code>Hashtable</code>: 读写都加了 <code>synchronized</code>，高并发下效率低下</li>
+<li><code>ConcurrentHashMap</code>: <ul>
+<li>JDK1.7: <code>Segment</code> 分段锁，需要进行两次<code>hash</code>计算。相当于嵌套的<code>HashMap</code>，只不过第一层是加锁的。</li>
+<li>JDK1.8: 分段锁粒度更小，并发度更高，每个数组<code>Node</code>都是一把锁, 取消了<code>Segment</code>, 只需要一次<code>hash</code>计算。</li>
+</ul>
+</li>
+<li>JVM 运行时数据区<ul>
+<li>程序计数器</li>
+<li>虚拟机栈: <strong>每个方法在被调用时会创建一个栈帧</strong>，从调用到执行完成的过程，就是入栈出栈的过程。</li>
+<li>堆：最大的一块，所有线程共享，<strong>对象实例在堆里分配内存</strong>，是垃圾收集器（GC）管理的主要区域。</li>
+<li>方法区：存储已被虚拟机加载的<strong>类信息、常量、静态变量、即时编译器编译后的代码</strong>等数据</li>
+<li>直接内存：<strong>并不是虚拟机运行时数据区的一部分</strong>，也不是Java虚拟机规范中定义的内存区域。</li>
+<li>运行时常量池<ul>
+<li>JDK1.6: 方法去</li>
+<li>JDK1.7: 堆</li>
+<li>JDK1.8: 元空间（直接内存）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>垃圾回收 （GC） <ul>
+<li>标记-清除算法（Mark-Sweep）：内存碎片</li>
+<li>复制算法（Copying）: 空间浪费（用一半，回收时把数据复制到另一半）</li>
+<li>标记-整理算法（Mark-Compact）：性能影响（内存区域的移动），先标记可回收对象，回收时再顺序排列</li>
+<li>分代收集<ul>
+<li>新生代（复制算法）</li>
+<li>老年代（标记清除或标记整理算法）</li>
+</ul>
+</li>
+<li>回收器：串行，并行，G1<ul>
+<li>传统垃圾回收，在逻辑上分出了相对独立的两大块：新生代和老年代</li>
+<li>G1: 没有严格的新生代和老年代，而是把内存区域分成一个个小块，每一个小块即可能给新生代用也可能给老年代用。新生代依然是复制算法，老年代是标记清除算法。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>类加载机制：加载（类加载器），连接（验证，准备-<code>static</code>初始值，解析-常量值引用转实际值），初始化-<code>static</code>变量和语句块，使用，卸载<ul>
+<li>类加载器<ul>
+<li>启动类加载器（无法调用）：<code>Bootstrap - JAVA_HOME\lib</code></li>
+<li>扩展类加载器：<code>Extension JAVA_HOME\lib\ext</code></li>
+<li>应用程序加载器（程序中默认的加载器）：用户类路径上的类库</li>
+<li>自定义类加载器（部署热替换，类加密解密）</li>
+</ul>
+</li>
+<li>双亲委派：首先将加载任务委托给父加载器，依次递归，如果父类加载器可以完成加载任务，就成功返回；只有父类加载器无法完成加载任务时，才自己去加载。<ul>
+<li>具备了优先级的层次关系，保证Java程序稳定运行（比如启动类加载器的类无法擅自篡改）</li>
+<li>启动类加载器是用<code>C++</code>语言实现的，它负责加载<code>Java</code>核心类库，如<code>rt.jar</code>等。启动类加载器是虚拟机的一部分，它不是<code>java.lang.ClassLoader</code>的子类，也不受<code>Java</code>代码的控制。因此，启动类加载器里的类无法被用户篡改，除非修改虚拟机本身。</li>
+<li>双亲委派机制的作用是<strong>防止重复加载同一个类，以及保护核心类库不被恶意修改</strong>。如果用户自定义的类加载器不遵循双亲委派机制，那么可能会破坏类的唯一性，导致类型转换异常或安全漏洞。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程池：<code>corePoolSize, maximumPoolSize, keepAliveTime, workQueue, RejectedExecutionHandler</code>(拒绝策略)<ol>
+<li>当线程数小于<code>corePoolSize</code>, 会直接创建线程</li>
+<li>当线程数等于<code>corePoolSize</code>，会把任务提交到 <code>workQueue</code></li>
+<li>当<code>workQueue</code>满了，线程池又开始创建线程<ul>
+<li>可以通过自定义队列的拒绝添加来提前开启线程，等线程满了可以继续往队列里放</li>
+</ul>
+</li>
+<li>当线程数等于<code>maximumPoolSize</code>, 开始启用拒绝策略 <code>RejectedExecutionHandler</code><ul>
+<li><code>AbortPolicy</code>: 抛出异常</li>
+<li><code>CallerRunsPolicy</code>: 谁提交的谁执行</li>
+<li><code>DiscardOldestPolicy</code>: 丢弃最老的任务，然后执行最新的任务</li>
+<li><code>DiscardPolicy</code>: 直接丢弃</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>线程池为什么这样设计：<ul>
+<li>线程的创建，需要获取全局锁，为了保证线程池的状态和线程数量的一致性。这也会影响线程池的效率，所以设计<code>corePoolSize</code>。<ul>
+<li><code>corePoolSize</code> 是在不超时情况下，保持活跃的最少线程数。这里的超时指的是 <code>ThreadPoolExecutor.allowCoreThreadTimeOut</code></li>
+</ul>
+</li>
+<li>线程是系统的稀缺资源，所以要尽量用最小的线程数干最多的事情。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多线程下都概率远远大于写概率，如何解决并发问题<ul>
+<li>使用内置锁，会有性能问题</li>
+<li>一写多读：使用 <code>volatile</code> 关键字，不保证原子性，但是保证可见性</li>
+<li>多写多读：使用读写锁（<code>ReentrantReadWriteLock</code>）</li>
+<li>少写多读：写时复制容器（<code>CopyOnWriteXxx</code>），读写分离<ul>
+<li>缺陷：内存占用，数据一致性（只保证数据的最终一致性）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>高并发下，如何做到安全的修改同一行数据<ul>
+<li>JVM：内置锁<code>synchronized</code>；<code>Lock</code>（<code>finally</code>里释放锁）；</li>
+<li>分布式：分布式锁（DB 性能差，Redis 死锁，Zookeeper）<ul>
+<li>Zookeeper：存取数据，节点监听<ul>
+<li><code>PERSISTENT</code>: 持久化目录节点，断开连接后，节点依旧在</li>
+<li><code>PERSISTENT_SEQUENTIAL</code>: 持久化顺序编号目录节点，断开连接后，节点依旧在，给该节点名称进行顺序编号</li>
+<li><code>EPHEMERAL</code>: 临时目录节点，端口连接后，节点被删除</li>
+<li><code>EPHEMERAL_SEQUENTIAL</code>: 临时顺序编号目录节点，端口连接后，节点被删除，给该节点名称进行顺序编号</li>
+</ul>
+</li>
+<li>基于异常的（节点重名会报错）：使用临时节点<ul>
+<li>获得锁：创建临时目录节点成功（<code>ZkClien::createEphemeral</code>, 节点重名会报错）</li>
+<li>等待获取锁：监听锁的节点是否被删除（<code>IZkDataListener::handleDataDeleted; ZkClient::subscribDataChanges</code>）</li>
+<li>释放锁：删除锁节点（<code>ZkClient::delete; ZkClient::close</code>）</li>
+</ul>
+</li>
+<li>基于相互监听（性能高，占用资源，每个线程都会创建一个临时顺序编号节点）：使用临时顺序编号节点<ul>
+<li>获得锁：创建临时顺序编号节点，判断是不是排在最前面，是就获得锁</li>
+<li>等待获取锁：监听前一个节点是否被删除</li>
+<li>释放锁：删除自己的临时顺序编号节点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Redis 高性能的原因<ul>
+<li>数据存在内存中</li>
+<li>存储结构简单</li>
+<li>单线程，没有多线程的资源竞争</li>
+<li>多路复用，把多个请求的指令放到一个队列里，让单个Redis线程去队列拿指令</li>
+<li>resp协议，协议简单，人类可读：*代表指令由几部分组成，$代表每部分有几个字符<ul>
+<li><code>set jxch value</code>  -&gt; <code>*3 $3 set $4 jxch $5 value</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>怎么控制缓存的更新：使用 <code>SpringCache - CacheManger(RedisTemplate); CacheService</code><ul>
+<li>查询：<ol>
+<li>从缓存中加载数据</li>
+<li>如果缓存中有就直接返回给调用端</li>
+<li>如果缓存中没有数据，就从数据库中加载数据（如果要求强一致性的话，同一时间只允许一个请求访问数据库）</li>
+<li>数据库查询的结果不为空，就把数据放入缓存中</li>
+</ol>
+</li>
+<li>更新：<ul>
+<li>数据实时同步失效（增量&#x2F;主动）：强一致性，<strong>更新数据库之后淘汰缓存，读请求更新缓存</strong>，为避免缓存雪崩，<strong>更新缓存的过程需要进行同步控制，同一时间只允许一个请求访问数据库</strong>，为了保证数据的一致性还要<strong>加上缓存失效</strong>。<ul>
+<li>不能先淘汰缓存再更新数据库，会导致并发问题，大量读请求访问到数据库。</li>
+<li>锁的粒度要细，避免阻塞太多线程；单体应用的话注意不要意外释放其他线程的锁。</li>
+<li><strong>缺点：如果更新业务暂时连不上缓存的话，其他业务就会出现脏读</strong></li>
+</ul>
+</li>
+<li>数据准实时更新（增量&#x2F;被动）：准一致性，更新数据库后，<strong>异步更新缓存</strong>，使用多线程技术或者MQ实现。优点是和缓存解耦。<ol>
+<li>业务服务更新数据</li>
+<li>业务服务通过MQ向缓存服务发送消息</li>
+<li>缓存服务接收消息</li>
+<li>缓存服务读取数据</li>
+<li>缓存服务更新缓存</li>
+</ol>
+</li>
+<li>任务调度更新（全量&#x2F;被动）：最终一致性，采用任务调度框架，按照一定频率更新。比如报表数据（年度，月度），在晚上3点同步一次。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A服务调用B服务多接口，响应时间最短方案：改串行请求为并行请求</li>
+<li>A系统给B系统转100块钱，如何实现？<ul>
+<li><code>@Transactional</code> 事务里有外调耗时接口占用DB连接怎么办？<ul>
+<li><strong>使用编程式事务</strong> <code>TransactionTemplate</code>: <code>template.execute</code></li>
+<li>为了防止第三方请求挂了，<strong>先记录请求，标记为正在处理中</strong></li>
+</ul>
+</li>
+<li>如何保证<strong>幂等性</strong><ul>
+<li>基于状态机的<strong>乐观锁</strong>（数据库version字段，确保只有一个线程操作数据库，比如能成功更新version为0再向下执行）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何避免<code>MQ</code>重复消费（幂等性）：消息超时重传（生产者重传和<code>MQ</code>重传）<ul>
+<li>幂等性：不论操作重复多少次都不改变结果</li>
+<li>乐观锁：数据库版本号<code>Version</code>， <code>set version=version+1 where version=oldversion</code></li>
+<li>去重表：构建一个存储任务唯一ID的表，执行任务前先检查去重表里有没有执行过这个任务（为了加快速度可以放到缓存里）</li>
+</ul>
+</li>
+<li>如何做限流策略（令牌桶和漏斗算法）<ul>
+<li>漏桶：请求先进入漏桶里（请求队列），当请求量大的时候，超出队列的部分可以熔断</li>
+<li>令牌桶（用的最多）：令牌池不断地以一定的速度生成一定量的令牌，客户端调服务之前，先去令牌桶请求一个令牌才能调<ul>
+<li>优点，可以应对突发流量，比如秒杀1000个商品可以预制1000个令牌</li>
+<li>当令牌桶里没有令牌时，可以拒绝服务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一致性<code>Hash</code>算法（<code>Hash</code>环）：解决分布式扩容后需要重新计算<code>hash</code>的问题（代价太高）<ul>
+<li>Hash环：长度是2^32，确定服务器在此环上的位置</li>
+<li>数据存放：对2^32取模，确定数据在此环上的位置，然后存放在此环顺时针方向上最近的服务器上</li>
+<li>优点：服务器节点的增删只影响到少量的数据</li>
+</ul>
+</li>
+<li>HTTP和HTTPS有什么区别<ul>
+<li>HTTP是不安全的：数据拦截、数据篡改、数据攻击</li>
+<li>HTTPS的安全需求：数据加密、身份验证、数据完整性</li>
+<li>对称加密：就是一个密钥可以加密也可以解密</li>
+<li>非对称加密：就是公钥加密的内容，必须用私钥才能解密，私钥加密的内容，必须用公钥才能解密</li>
+<li>HTTPS请求过程：<ol>
+<li>客户端向服务器发送HTTPS请求，<strong>请求服务器的公钥证书</strong>。</li>
+<li>服务器将公钥证书发送给客户端，公钥证书包含了服务器的公钥、证书持有者信息、数字签名等。</li>
+<li>客户端验证服务器的证书，主要是验证证书的有效期、颁发者、域名等，以及证书的数字签名是否合法。如果验证通过，客户端就信任了服务器的公钥。</li>
+<li><strong>客户端随机生成一个用于对称加密的密钥，称为会话密钥，然后用服务器的公钥加密后发送给服务器。</strong></li>
+<li><strong>服务器用自己的私钥解密得到会话密钥，然后用会话密钥加密一个确认信息发送给客户端。</strong></li>
+<li><strong>客户端用会话密钥解密得到确认信息</strong>，然后开始用会话密钥加密解密数据，进行安全的通信。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>Cookie/Session</code> 机制：单点登录<ul>
+<li><code>Cookie</code>: <code>key:value</code>键值信息<ul>
+<li>不可跨域名（只能拿到当前域名下的cookie，包含父级域名）</li>
+<li>有效期限制</li>
+<li>path表示携带cookie的请求路径（&#x2F;: 表示全部请求都要携带cookie）</li>
+</ul>
+</li>
+<li><code>Session</code>: 服务器端基于内存的缓存技术，用来保存针对每个用户的会话数据<ul>
+<li>通过<code>Session ID</code>来区分用户，用户只要连接到服务器，服务器就会为之分配一个唯一的<code>Session ID</code></li>
+<li>有失效时间（超时限为得到连接的<code>session</code>将被销毁）</li>
+<li><code>Session</code>用法：<code>HttpServletRequest::getSession</code><ul>
+<li><code>HttpSession::setAttribute</code></li>
+<li><code>HttpSession::getAttribute</code></li>
+<li><code>HttpSession::removeAttribute</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Cookie</code>和<code>Session</code>的交互<ol>
+<li>服务器新建一个<code>Session</code>，把<code>SessionID</code>设置到<code>Cookie</code>中</li>
+<li>服务器通过 <code>HttpServletResponse::addCookie</code> 向<code>Header</code>中设置<code>Cookie</code></li>
+<li>浏览器接收<code>Header</code>中的<code>Cookie</code>并保存，在下次请求的<code>Header</code>中，携带<code>Cookie</code>信息</li>
+<li>当程序请求<code>Session</code>时，首先根据<code>Cookie</code>中携带的<code>SessionID</code>检索<code>Session</code></li>
+<li>检索不到，就新建一个<code>Session</code>，重复第1步</li>
+</ol>
+</li>
+<li>使用场景：<code>Cookie</code>数据存放在客户的浏览器上，<code>Session</code>数据存放在服务器上<ul>
+<li><code>Cookie</code> 很不安全，客户端可以分析并进行<code>Cookie</code>欺骗，所以如果考虑安全性的话，应该多用<code>Session</code></li>
+<li><code>Session</code> 会在一定时间保存在服务器上。当访问增多，会占用服务器性能，所以如果考虑减轻服务器压力的话，应该多用<code>Cookie</code></li>
+<li>单个<code>Cookie</code>保存的数据不能超过<code>4K</code>，很多浏览器都限制一个站点最多保存<code>20</code>个<code>Cookie</code></li>
+<li>若客户端禁止<code>Cookie</code>：一般使用<code>URL</code>重写，把<code>SessionID</code>直接附加到<code>URL</code>后面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事务<ul>
+<li>事务的七个传播属性<ul>
+<li><code>PROPAGAtiON_REQUIRED</code>: 支持当前事务，如果当前没有事务，就新建一个事务。这是默认的。</li>
+<li><code>PROPAGATION_SUPPORTS</code>: 支持当前事务，如果当前没有事务，就以非事务方式执行</li>
+<li><code>PROPAGATION_MANDATORY</code>: 支持当前事务，如果当前没有事务，就抛出异常</li>
+<li><code>PROPAGATION_REQUIRES_NEW</code>: 新建事务，如果当前存在事务，把当前事务挂起</li>
+<li><code>PROPAGATION_NOT_SUPPORTED</code>: 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起</li>
+<li><code>PROPAGATION_NEVER</code>: 以非事务方式执行，如果当前存在事务，就抛出异常</li>
+<li><code>PROPAGATION_NESTED</code>: 如果当前存在事务，则在嵌套事务内执行（可以实现<strong>部分回滚</strong>）。如果当前没有事务，则与<code>PROPAGAtiON_REQUIRED</code>类似操作（新建一个事务）<ul>
+<li>嵌套的事务可以<strong>独立于当前事务进行单独地提交或回滚</strong>，如果外部事务提交，嵌套事务也会被提交，这个规则同样适用于回滚</li>
+<li>这是因为<code>PROPAGATION_NESTED</code>执行后并不是真正地提交了子事务，而是将子事务的状态保存在一个<strong>保存点</strong>上，等待外部事务的最终提交或回滚。<strong>如果外部事务提交，那么子事务也会提交，如果外部事务回滚，那么子事务也会回滚到保存点</strong>。</li>
+<li>这意味着<code>PROPAGATION_NESTED</code>可以实现部分回滚，而<code>PROPAGATION_REQUIRED</code>只能全部回滚或全部提交</li>
+<li>比如<code>PROPAGATION_NESTED</code>失败了，但是外部事务成功了，则<strong>外部事务可以提交，只是嵌套事务部分回滚</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事物的五种隔离级别：指的是若干个并发事务之间的隔离程度<ul>
+<li><code>ISOLATION_DEFAULT</code>: 数据库默认的事务隔离级别<ul>
+<li><code>MySQL(ISOLATION_REPEATABLE_READ)</code>：<code>show variables like &#39;%tx_isolation%&#39;</code></li>
+</ul>
+</li>
+<li><code>ISOLATION_READ_UNCOMMITTED</code>（未提交读）: 最低隔离级别，<strong>允许另外一个事务可以看到这个事务未提交的数据</strong>，<strong>会产生脏读，不可重复读和幻读。</strong>   </li>
+<li><code>ISOLATION_READ_COMMITTED</code>（已提交读，不可重复读）: 保证事务修改的数据提交后才能被另外一个事务读取。<strong>另外一个事务不能读取该事务未提交的数据</strong>。<strong>可以避免脏读出现，但是可能会出现不可重复读和幻读。</strong>    </li>
+<li><code>ISOLATION_REPEATABLE_READ</code>（可重复读）: <strong>可以防止脏读和不可重复读。但是可能出现幻读。</strong>它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了不可重复读的产生。</li>
+<li><code>ISOLATION_SERIALIZABLE</code>（可串行化）: 最高代价但是最可靠的事务隔离级别。事务被处理为<strong>顺序执行。防止脏读，不可重复读和幻读。</strong> 工作中尽量不要用，因为它会<strong>锁表</strong>。</li>
+</ul>
+</li>
+<li>脏读：读取未提交的数据</li>
+<li>不可重复读：在同一个事务里面读取同一行数据，产生了不一样的结果（第二次读的时候，其他事务进行了提交）</li>
+<li>幻读：多次查询同一个范围的数据，但得到的结果集不一致。这是因为在这个过程中，其他事务可能已经新增或删除了符合该范围条件的数据行。幻读可能会导致数据查询结果不准确。</li>
+<li>事务隔离级别越高，越能保证数据的一致性和完整性，但是执行效率也越低。</li>
+<li>MySQL开启事务：<code>BEGIN</code>；回滚：<code>ROLLBACK</code></li>
+</ul>
+</li>
+<li><code>@Transaction</code>位置以及回滚策略<ul>
+<li>不建议写在接口上（会导致事务丢失且代理行为不一致者不可预测的代理行为）<ul>
+<li>如果用<code>CGLIB</code>的动态代理会导致事务丢失，因为<code>Spring</code>只会检测被代理类上的注解</li>
+<li>只有用<code>JDK</code>的动态代理才会生效，因为<code>Spring</code>会检测接口上的注解</li>
+</ul>
+</li>
+<li>建议写在业务实现类上，只能写在<code>public</code>方法上，且方法只能被外部调用才生效<ul>
+<li>如果用<code>JDK</code>的代理方式，很好理解，接口里都是<code>public</code>方法</li>
+<li>如果使用<code>CGLIB</code>代理方式，是不可以代理<code>final</code>和<code>private</code>的，<code>CGLIB</code>虽然可以代理<code>protected</code>方法，但是<code>Spring AOP</code>会先判断该方法是否是<code>public</code>的，如果不是，就会用反射调用原始方法，所以写在<code>protected</code>方法上也会失效</li>
+<li><code>Spring AOP</code>这样设计一方面也是为了保持和<code>JDK</code>代理行为的一致性，因为它默认使用 <code>JDK</code> 动态代理来实现，如果被代理的类没有实现接口，则会自动使用 <code>CGLIB</code> 来进行代理。</li>
+<li><code>AOP</code>代理是通过代理对象访问原方法，如果在原方法内直接调用内部方法，就不会走代理对象了，所以只能外部调用</li>
+</ul>
+</li>
+<li>事务回滚（按下列顺序处理）：<ol>
+<li><code>noRollbackFor</code>：不回滚，提交</li>
+<li><code>rollbackFor</code>：回滚</li>
+<li><code>RuntimeException</code>：回滚</li>
+<li>发生其他异常时：不回滚，提交</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>动态代理: 是使用反射和字节码技术，在运行期创建指定接口或类的子类（动态代理）以及其实例对象的技术，通过这个技术可以<strong>无侵入</strong>性的为代码进行增强<ul>
+<li>JDK：<code>Proxy::newProxyInstance</code>，<code>InvocationHandler::invoke</code> <ul>
+<li>被代理的类必须实现一个接口</li>
+</ul>
+</li>
+<li>CGLIB: 是一个基于ASM的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB通过<strong>继承方式</strong>实现代理; <ul>
+<li><code>Enhancer</code>：来指定要代理的目标对象、实际处理代理逻辑的对象，最终通过调用<code>create()</code>方法得到代理对象，对这个对象所有非<code>final</code>方法的调用都会转发给<code>MethodInterceptor</code>;<ul>
+<li><code>Enhancer::setSuperclass</code></li>
+<li><code>Enhancer::setCallback</code></li>
+<li><code>Enhancer::create</code></li>
+</ul>
+</li>
+<li><code>MethodInterceptor</code>：动态代理对象的方法调用都会转发到<code>intercept</code>方法进行增强；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>SpringBoot</code> 启动机制<ul>
+<li>整合三方依赖：<code>maven</code>父子继承</li>
+<li>无配置文件集成<code>SpringMvc</code>: 内置<code>Tomcat</code>，通过<code>@EnableWebMvc</code>启动<code>SpringMvc</code><ul>
+<li><code>@SpringBootApplication -&gt; @SpringBootConfiguration; @EnableAutoConfiguration; @ComponentScan</code></li>
+<li><code>@EnableAutoConfiguration -&gt; @Import(AutoConfigurationImportSelector.class)</code> </li>
+<li><code>class AutoConfigurationImportSelector implements DeferredImportSelector -&gt; selectImports()</code></li>
+<li><code>selectImports() -&gt; getCandidateConfigurations() -&gt; META-INF/spring.factories</code></li>
+<li><code>spring-boot-autoconfigure.jar -&gt; META-INF/spring.factories</code></li>
+<li><code>META-INF/spring.factories -&gt; xxx.xxx.WebMvcAutoConfiguration</code></li>
+</ul>
+</li>
+<li><code>Tomcat</code> 是怎么启动的<ul>
+<li><code>TomcatWebServerFactoryCustomizer</code> 注册<ul>
+<li><code>META-INF/spring.factories -&gt; xxx.xxx.EmbeddedWebServerFactoryCustomizerAutoConfiguration -&gt; @ConditionalOnClass(&#123;Tomcat.class, UpgradeProtocol.class&#125;)</code></li>
+<li><code>@Bean TomcatWebServerFactoryCustomizer -&gt; implements WebServerFactoryCustomizer</code></li>
+<li><code>WebServerFactoryCustomizerBeanPostProcessor -&gt;  List&lt;WebServerFactoryCustomizer&lt;?&gt;&gt;</code></li>
+</ul>
+</li>
+<li><code>TomcatServletWebServerFactory</code> 注册<ul>
+<li><code>META-INF/spring.factories -&gt; xxx.xxx.ServletWebServerFactoryAutoConfiguration -&gt; @Import(EmbeddedTomcat.class) @Bean@ConditionalOnClass(name= &quot;org.apache.catalina.startup.Tomat&quot;)</code></li>
+<li><code>EmbeddedTomcat -&gt; @ConditionalOnClass(&#123;Servlet.class, Tomcat.class, UpgradeProtocol.class&#125;) @Bean TomcatServletWebServerFactory</code></li>
+</ul>
+</li>
+<li><code>TomcatServletWebServerFactory::getWebServer</code> 启动<ul>
+<li><code>TomcatServletWebServerFactory implements ServletWebServerFactory::getWebServer</code></li>
+<li><code>SpringApplicaiton::run -&gt; refreshContext() -&gt; AbstractApplicationContext:::refresh -&gt; ServletWebServerApplicationContext::onRefresh -&gt; createWebServer() -&gt; ServletWebServerFactory::getWebServer</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Spring IOC</code> 容器启动流程<ul>
+<li><code>IOC</code> 容器，就是内存里的 <code>Map&lt;beanname, bean&gt;</code>         </li>
+<li><code>ApplicationContext app = new AnnotationConfigApplicationContext(App.class)</code></li>
+<li><code>AbstractApplicationContext::refresh</code></li>
+<li><code>obtainFreshBeanFactory</code> 获取<code>Bean</code>工厂</li>
+<li><code>prepareBeanFactory</code> 准备上下文</li>
+<li><code>postProcessBeanFactory</code>  beanFactory 后置处理器</li>
+<li><code>invokeBeanFactoryPostProcessors</code> 调用 beanFactory 后置处理器</li>
+<li><code>registerBeanPostProcessors</code> 注册 Bean 后置处理器</li>
+<li><code>initMessageSource</code> 初始化上下文</li>
+<li><code>initApplicationEventMulticaster</code> 初始化事件器</li>
+<li><code>onRefresh</code> 初始化特殊 Bean</li>
+<li><code>registerListeners</code> 监听器</li>
+<li><code>finishBeanFactoryInitialization</code> 实例化非懒加载的bean<ul>
+<li><code>preInstantiateSingletons -&gt; getBean -&gt; doGetBean</code></li>
+<li><code>getSingleton -&gt; Map&lt;String, Object&gt; singletonObjects</code> 先去缓存中拿</li>
+<li><code>createBean -&gt; doCreateBean</code> 没有的话就创建Bean</li>
+<li><code>createBeanInstance</code> 创建实例</li>
+<li><code>populateBean</code> 属性赋值</li>
+<li><code>initializeBean</code> 初始化Bean<ul>
+<li><code>invokeAwareMethods</code> Aware</li>
+<li><code>applyBeanPostProcessorsBeforeInitialization</code> 前置处理器</li>
+<li><code>invokeInitMethods</code> 初始化</li>
+<li><code>applyBeanPostProcessorsAfterInitialization</code> 后置处理器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>finishRefresh</code> 发布完成事件</li>
+<li><code>close() -&gt; doClose()</code> 关闭容器<ul>
+<li><code>destroyBeans</code> 销毁Bean</li>
+<li><code>closeBeanFactory</code> 关闭Bean工厂</li>
+<li><code>onClose</code> 子类(<code>AbstractApplicationContext</code>)自定义清理工作</li>
+<li><code>resetCommonCaches</code> 重置缓存，避免内存泄漏</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简历：简洁<ul>
+<li>个人概况；教育背景；求职意向；职业技能；工作经验；项目经验；自我评价；证书</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+<!-- post-guide -->
+
+    <div class="post-guide">
+        <div class="item left">
+            
+              <a href="/2023/12/30/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-RabbitMQ/">
+                  <i class="fa fa-angle-left" aria-hidden="true"></i>
+                  Java面试-RabbitMQ
+              </a>
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2023/12/29/Java%E5%8C%BA%E5%9D%97%E9%93%BE/Java%E5%8C%BA%E5%9D%97%E9%93%BE/">
+                Java区块链
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+<!-- comment - giscus -->
+
+
+<!-- comment - valine -->
+
+
+<script>
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©<span id="footerYear-start">2023</span>-<span id="footerYear-end"></span>
+	<a href="/">姜希成</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/wujun234" target="_blank">WuJun</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById('footerYear-end').innerHTML = new Date().getFullYear() + '';
+</script>
+
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>

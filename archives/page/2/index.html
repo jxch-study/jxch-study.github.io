@@ -527,6 +527,28 @@
 								<li class="directory">
 									<a href="#" class="directory">
 										<i class="fa fa-plus-square-o"></i>
+										Java区块链
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E5%8C%BA%E5%9D%97%E9%93%BE/Java%E5%8C%BA%E5%9D%97%E9%93%BE/">
+                     
+										    Java区块链
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
 										Java编程参考
 									</a>
 									
@@ -598,6 +620,39 @@
 									
 							<ul>
 								<li class="file">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-JVM/">
+                     
+										    Java面试-JVM
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/12/30/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-RabbitMQ/">
+                     
+										    Java面试-RabbitMQ
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
+									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-%E5%9F%BA%E7%A1%80/">
+                     
+										    Java面试-基础
+                     
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+							<ul>
+								<li class="file">
 									<a href="/2023/12/29/Java%E9%9D%A2%E8%AF%95/Java%E9%9D%A2%E8%AF%95-%E5%AD%97%E7%AC%A6%E4%B8%B2/">
                      
 										    Java面试-字符串
@@ -629,6 +684,145 @@
 	<!-- 引入正文 -->
 	<div id="content">
 		<div id="index">
+	
+		<div class="index-li">
+			<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-08-IM%E7%B3%BB%E7%BB%9F/">
+				<h2 class="index-title">
+					05-08.IM系统
+				</h2>
+				<div class="index-brief">
+					目录
+01.IM系统重要功能
+02.IM系统高并发架构
+
+01.IM系统重要功能IM系统重要功能：
+
+未读数：指用户还没读的消息数量。
+单聊：一对一聊天。
+群聊：多人聊天。
+
+IM系统基础架构：
+
+客户端：作为与服务端进行消息收发通信的终端
+网关层：也叫接入层，为客户端收发消息提供入口
+服务层：负责
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2023-07-14</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/IM/">IM</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/02-IM%E7%B3%BB%E7%BB%9F%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84/">
+				<h2 class="index-title">
+					02.IM系统高并发架构
+				</h2>
+				<div class="index-brief">
+					
+如何保证聊天系统消息的可靠投递(不丢消息)
+IM客户端发送消息如果超时或失败需要重发，客户端在发送消息时需要给每条消息生成一个id，IM服务端根据此id做好去重机制
+为保证服务端消息不丢失，我们可以使用Rocket MQ的可靠消息机制来保证
+通过客户端的ACK确认接收消息的机制来保证不丢消息
+
+离
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2023-07-14</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/IM/">IM</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2023/07/14/08.IM%E7%B3%BB%E7%BB%9F/01-IM%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD/">
+				<h2 class="index-title">
+					01.IM系统基础功能
+				</h2>
+				<div class="index-brief">
+					IM系统基础功能：
+
+用户：系统的使用者。
+消息：是指用户之间的沟通内容（通常在IM系统中，消息会有以下几类：文本消息、表情消息、图片消息、视频消息、文件消息等等）。
+会话：通常指两个用户之间因聊天而建立起的关联。
+群：通常指多个用户之间因聊天而建立起的关联。
+终端：指用户使用IM系统的机器（通常有
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2023-07-14</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/IM/">IM</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+		<div class="index-li">
+			<a href="/2023/07/14/00.%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/05-07.DDD%E8%AE%BE%E8%AE%A1/">
+				<h2 class="index-title">
+					05-07.DDD设计
+				</h2>
+				<div class="index-brief">
+					目录
+01.DDD设计思想
+02.DDD四层架构设计
+03.DDD通用型领域
+
+01.DDD设计思想
+技术主动理解业务
+Controller、Service等概念并不具备实际的业务价值
+如果新的设计对已有的架构造成太大的冲突，就只能考虑重构。而重构对于业务专家来说，没有什么业务价值
+鼓励形成团队内部
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2023-07-14</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/知识图谱/">知识图谱</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
 	
 		<div class="index-li">
 			<a href="/2023/07/14/07.DDD%E8%AE%BE%E8%AE%A1/03-DDD%E9%80%9A%E7%94%A8%E5%9E%8B%E9%A2%86%E5%9F%9F/">
@@ -807,135 +1001,6 @@ elasticsearch-dump：适合数据量不大，迁移索引个数不多的场景
 snapshot：适用数据量大的场景，原理就是从源ES集群创建数据快照，然后在目标ES集群中进行恢复
 创建快照前必须先创建repository仓库，一个repository仓库可以包含多份快照文件
 
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/15-%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE/">
-				<h2 class="index-title">
-					15.海量数据
-				</h2>
-				<div class="index-brief">
-					存储系统的技术选型技术选型时应该考虑哪些因素首先需要确定的是系统的类型，是一个在线业务系统，还是一个分析系统？在线业务系统对应的术语是OLTP ( On-line Transaction Processing，在线事务处理)，分析系统对应的术语是OLAP( Off-line Analytical P
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/03.%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/04.RockDB/01-RockDB/">
-				<h2 class="index-title">
-					01.RockDB
-				</h2>
-				<div class="index-brief">
-					RocksDB 是Facebook 开源的一个高性能、持久化的KV存储引擎，最初是Facebook 的数据库工程师团队基于Google LevelDB 开发。一般来说我们很少见到过哪个项目直接使用RocksDB 来保存数据，即使未来大概也不会像Redis 那样被业务系统直接使用。
-但是越来越多的新生
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/性能调优/">性能调优</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/14-%E9%AB%98%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99/">
-				<h2 class="index-title">
-					14.高并发读写
-				</h2>
-				<div class="index-brief">
-					
-侧重于“高并发读”的系统
-搜索引擎
-电商的商品搜索
-电商系统的商品描述、图片和价格
-
-
-侧重于“高并发写”的系统
-广告扣费系统
-
-
-同时有“高并发读”和“高并发写”的系统
-电商的库存系统和秒杀系统
-支付系统和微信红包
-IM、微博和朋友圈
-
-
-
-高并发读
-加缓存&#x2F;读副本
-本地缓存或集中式缓
-					...
-				</div>
-			</a>
-                <div class="article-meta">
-				    <span>2023-07-11</span>
-                    
-                            
-                                
-                                    <span>
-                                        <i class="fa fa-folder" aria-hidden="true"></i>
-                                        <a href="/categories/电商系统/">电商系统</a>
-										
-                                    </span>
-                                
-                            
-                    
-                </div>
-		</div>	
-	
-		<div class="index-li">
-			<a href="/2023/07/11/06.%E7%94%B5%E5%95%86%E7%B3%BB%E7%BB%9F/13-Sentinel%E9%99%90%E6%B5%81/">
-				<h2 class="index-title">
-					13.Sentinel限流
-				</h2>
-				<div class="index-brief">
-					针对电商系统，在遇到大流量时，更多考虑的是运行阶段如何保障系统的稳定运行，常用的手段：限流，降级，拒绝服务。
-限流客户端限流
-
-好处：可以限制请求的发出，通过减少发出无用请求从而减少对系统的消耗。
-缺点：当客户端比较分散时，没法设置合理的限流阈值：如果阈值设的太小，会导致服务端没有达到瓶颈时客户端已
 					...
 				</div>
 			</a>
